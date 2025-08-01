@@ -1,35 +1,18 @@
 ---
 import ToolTemplate from '../../layouts/ToolTemplate.astro';
 
-const premiumAppCTA = {
-  name: "Pro Loom Downloader",
-  description: "Professional desktop application for bulk downloading Loom recordings, managing video libraries, and advanced processing.",
-  buyLink: "https://serp.ly/loom-video-downloader",
-  demoLink: "https://www.youtube.com/watch?v=Qw8r6Qw8r6Q", // Replace with actual Loom YouTube video if different
-  features: [
-    "Bulk download entire Loom video libraries",
-    "Download private/workspace Loom recordings",
-    "Multiple quality options (4K, 1080p, 720p, 480p)",
-    "Automatic transcription and subtitle downloads",
-    "Batch processing with queue management",
-    "Smart file organization by date/workspace",
-    "Video compression and format conversion",
-    "Export recordings with metadata"
-  ]
-};
-
 const platform = "Loom";
-const description = "Download Loom screen recordings and videos quickly and easily. Free, secure, and no software installation required.";
+const description = "Download Loom recordings and videos quickly and easily. Free, secure, and no software installation required.";
 
 const features = [
-  "✓ Download Loom recordings in high quality",
-  "✓ No software installation required - works in your browser",
-  "✓ Completely free with no registration needed",
-  "✓ Fast download speeds and reliable service",
-  "✓ Mobile-friendly interface",
-  "✓ Privacy-focused - no data stored",
-  "✓ Support for multiple formats",
-  "✓ Secure downloads with HTTPS encryption"
+  "Download Loom recordings in high quality",
+  "No software installation required - works in your browser",
+  "Completely free with no registration needed",
+  "Fast download speeds and reliable service",
+  "Mobile-friendly interface",
+  "Privacy-focused - no data stored",
+  "Support for multiple formats",
+  "Secure downloads with HTTPS encryption"
 ];
 
 const instructions = [
@@ -58,47 +41,28 @@ const instructions = [
 const faqs = [
   {
     question: "Is it legal to download Loom recordings?",
-    answer: "Downloading Loom recordings you have access to for personal use is generally acceptable, but always respect copyright laws and platform terms of service."
+    answer: "Downloading Loom recordings for personal use is generally acceptable, but always respect copyright laws and platform terms of service."
   },
   {
     question: "Do I need to install any software?",
     answer: "No! Our Loom downloader works entirely in your web browser. No software installation required."
   },
   {
+    question: "Is this service free?",
+    answer: "Yes, our downloader is completely free with no hidden costs or premium features."
+  },
+  {
+    question: "Is my data safe?",
+    answer: "Yes, we don't store your downloads or personal information. All downloads are processed securely."
+  },
+  {
     question: "What video quality can I download?",
     answer: "We support the original Loom recording quality, typically ranging from 480p to 1080p HD, depending on the recording settings."
-  },
-  {
-    question: "Can I download private Loom recordings?",
-    answer: "Our free tool can only download publicly accessible Loom recordings. For private workspace recordings and bulk downloads, check out our premium desktop application."
-  },
-  {
-    question: "Are there any limits on downloads?",
-    answer: "Our free online tool has reasonable usage limits to ensure fair access for everyone. For unlimited downloads, consider our premium app."
   }
 ];
 
-const relatedTools = ["YouTube", "Vimeo", "Skool", "TikTok", "Instagram"];
+const relatedTools = ["YouTube", "TikTok", "Instagram", "PDF", "Twitter"];
 ---
-
-<section class="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-8 flex flex-col md:flex-row items-center gap-6">
-  <div class="flex-1">
-    <h2 class="text-2xl font-bold mb-2">Upgrade: Pro Loom Downloader</h2>
-    <p class="mb-3">Professional desktop app for bulk Loom downloads, private workspace recordings, subtitles, and more.</p>
-    <ul class="list-disc ml-6 mb-3 text-sm">
-      <li>Bulk download entire Loom video libraries</li>
-      <li>Download private/workspace Loom recordings</li>
-      <li>Multiple quality options (4K, 1080p, 720p, 480p)</li>
-      <li>Automatic transcription and subtitle downloads</li>
-      <li>Batch processing with queue management</li>
-      <li>Smart file organization by date/workspace</li>
-      <li>Video compression and format conversion</li>
-      <li>Export recordings with metadata</li>
-    </ul>
-    <a href="https://serp.ly/loom-video-downloader" class="inline-block bg-blue-600 text-white px-5 py-2 rounded font-semibold hover:bg-blue-700 transition">Get Pro Loom Downloader</a>
-    <a href="https://www.youtube.com/watch?v=Qw8r6Qw8r6Q" target="_blank" rel="noopener" class="ml-4 text-blue-700 underline">Watch Demo</a>
-  </div>
-</section>
 
 <ToolTemplate 
   platform={platform}
@@ -107,11 +71,4 @@ const relatedTools = ["YouTube", "Vimeo", "Skool", "TikTok", "Instagram"];
   instructions={instructions}
   faqs={faqs}
   relatedTools={relatedTools}
-  premiumApp={{
-    name: premiumAppCTA.name,
-    description: premiumAppCTA.description,
-    buyLink: premiumAppCTA.buyLink,
-    demoLink: premiumAppCTA.demoLink,
-    features: premiumAppCTA.features
-  }}
 />

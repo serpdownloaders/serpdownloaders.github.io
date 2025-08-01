@@ -1,33 +1,16 @@
 ---
 import ToolTemplate from '../../layouts/ToolTemplate.astro';
 
-const premiumAppCTA = {
-  name: "Pro TikTok Downloader",
-  description: "Professional desktop application for bulk downloading TikTok content, profile management, and advanced video processing.",
-  buyLink: "https://serp.ly/tiktok-downloader",
-  demoLink: "https://www.youtube.com/watch?v=Qw8r6Qw8r6Q", // Replace with actual TikTok YouTube video if different
-  features: [
-    "Bulk download entire TikTok profiles and hashtags",
-    "Download private/follower-only TikTok content",
-    "Multiple quality options (4K, 1080p, 720p, 480p)",
-    "Watermark removal with advanced processing",
-    "Automatic hashtag and mention extraction",
-    "Batch processing with queue management",
-    "Video analytics and engagement metrics",
-    "Export content with metadata and captions"
-  ]
-};
-
 const platform = "TikTok";
 const description = "Download TikTok videos without watermark in HD quality. Save TikTok content to your device instantly.";
 
 const features = [
-  "✓ Download TikTok videos without watermark",
-  "✓ HD quality downloads (up to 1080p)",
-  "✓ Save TikTok audio as MP3 files",
-  "✓ No app installation required",
-  "✓ Works on all devices (mobile, desktop, tablet)",
-  "✓ Completely free and unlimited downloads",
+  "Download TikTok videos without watermark",
+  "HD quality downloads (up to 1080p)", 
+  "Save TikTok audio as MP3 files",
+  "No app installation required",
+  "Works on all devices (mobile, desktop, tablet)",
+  "Completely free and unlimited downloads",
   "✓ Fast processing and download speeds",
   "✓ Privacy-focused - no data stored"
 ];
@@ -92,11 +75,4 @@ const relatedTools = ["YouTube", "Instagram", "Twitter", "Snapchat", "Facebook"]
   instructions={instructions}
   faqs={faqs}
   relatedTools={relatedTools}
-  premiumApp={{
-    name: premiumAppCTA.name,
-    description: premiumAppCTA.description,
-    buyLink: premiumAppCTA.buyLink,
-    demoLink: premiumAppCTA.demoLink,
-    features: premiumAppCTA.features
-  }}
 />

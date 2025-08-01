@@ -6,19 +6,173 @@ export interface Props {
   instructions: { step: number; text: string }[];
   faqs: { question: string; answer: string }[];
   relatedTools?: string[];
-  premiumApp?: {
-    name: string;
-    description: string;
-    price: string;
-    features: string[];
-    buyLink: string;
-    demoLink?: string;
-  };
 }
 
 import Layout from '../layouts/Layout.astro';
 
-const { platform, description, features, instructions, faqs, relatedTools, premiumApp } = Astro.props;
+const { platform, description, features, instructions, faqs, relatedTools } = Astro.props;
+const title = `${platform} Downloader - Free Online ${platform} Video & Content Downloader`;
+const metaDescription = `Download ${platform} videos, images and content for free. Fast, secure, no software required. ${description}`;
+const keywords = `${platform.toLowerCase()} downloader, download ${platform.toLowerCase()} videos, ${platform.toLowerCase()} content downloader, free ${platform.toLowerCase()} downloader`;
+---
+
+<Layout 
+  title={title}
+  description={metaDescription}
+  keywords={keywords}
+>
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-r from-primary-600 to-primary-700 text-white py-16">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h1 class="text-4xl md:text-5xl font-bold mb-6">
+        {platform} Downloader
+      </h1>
+      <p class="text-xl mb-8 opacity-90">
+        {description}
+      </p>
+      <div class="bg-white/10 backdrop-blur-sm rounded-lg p-6 mb-8">
+        <div class="flex items-center justify-center mb-4">
+          <input 
+            type="url" 
+            placeholder={`Paste your ${platform} URL here...`}
+            class="w-full max-w-md px-4 py-3 rounded-l-lg text-gray-900 border-0 focus:ring-2 focus:ring-white"
+            id="url-input"
+          />
+          <button 
+            class="bg-primary-700 hover:bg-primary-800 px-6 py-3 rounded-r-lg font-semibold transition-colors"
+            onclick="downloadContent()"
+          >
+            Download
+          </button>
+        </div>
+        <p class="text-sm opacity-80">Paste your {platform} URL and click download</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="py-16">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-center mb-12">Why Use Our {platform} Downloader?</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {features.map((feature) => (
+          <div class="flex items-start space-x-3">
+            <div class="text-primary-600 text-xl">✓</div>
+            <p class="text-gray-700">{feature}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- How to Use Section -->
+  <section class="bg-gray-50 py-16">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-center mb-12">How to Download from {platform}</h2>
+      <div class="space-y-6">
+        {instructions.map((instruction) => (
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-8 h-8 bg-primary-600 text-white rounded-full flex items-center justify-center font-semibold">
+              {instruction.step}
+            </div>
+            <p class="text-gray-700 text-lg">{instruction.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="py-16">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-center mb-12">Frequently Asked Questions</h2>
+      <div class="space-y-6">
+        {faqs.map((faq) => (
+          <div class="border border-gray-200 rounded-lg p-6">
+            <h3 class="text-lg font-semibold mb-3 text-gray-900">{faq.question}</h3>
+            <p class="text-gray-700">{faq.answer}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Related Tools Section -->
+  {relatedTools && relatedTools.length > 0 && (
+    <section class="bg-gray-50 py-16">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold text-center mb-12">Related Downloaders</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {relatedTools.map((tool) => (
+            <a 
+              href={`/tools/${tool.toLowerCase().replace(/\s+/g, '-')}-downloader`}
+              class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow text-center"
+            >
+              <h3 class="text-lg font-semibold text-primary-700">{tool} Downloader</h3>
+              <p class="text-gray-600 mt-2">Download {tool} content</p>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- Tutorial Article Section -->
+  <section class="py-16">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl p-8">
+        <div class="text-center">
+          <h2 class="text-2xl font-bold text-gray-900 mb-4">
+            📖 Complete Tutorial Available
+          </h2>
+          <p class="text-gray-600 mb-6">
+            Need more detailed instructions? Check out our comprehensive step-by-step guide for downloading {platform} content.
+          </p>
+          <a 
+            href={`/how-to-download-${platform.toLowerCase().replace(/\s+/g, '-')}`}
+            class="bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition-colors inline-flex items-center gap-2"
+          >
+            <span>📚</span>
+            Read Full Tutorial: How to Download {platform} Content
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- JSON-LD Schema -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": `${platform} Downloader`,
+    "description": metaDescription,
+    "url": `https://serpdownloaders.github.io/tools/${platform.toLowerCase()}-downloader`,
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Any",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "featureList": features
+  })} />
+
+  <script>
+    function downloadContent() {
+      const urlInput = document.getElementById('url-input') as HTMLInputElement;
+      const url = urlInput.value.trim();
+      
+      if (!url) {
+        alert('Please enter a URL');
+        return;
+      }
+      
+      // This is where you would implement the actual download logic
+      // For now, we'll show a placeholder message
+      alert(`Download functionality for ${url} would be implemented here`);
+    }
+  </script>
+</Layout>
 const title = `${platform} Downloader - Free Online ${platform} Video & Content Downloader`;
 const metaDescription = `Download ${platform} videos, images and content for free. Fast, secure, no software required. ${description}`;
 const keywords = `${platform.toLowerCase()} downloader, download ${platform.toLowerCase()} videos, ${platform.toLowerCase()} content downloader, free ${platform.toLowerCase()} downloader`;
@@ -126,64 +280,7 @@ const keywords = `${platform.toLowerCase()} downloader, download ${platform.toLo
   )}
 
   <!-- Tutorial Article Section -->
-    <!-- Premium App Section -->
-  {premiumApp && (
-    <section class="bg-gradient-to-r from-purple-600 to-blue-600 text-white py-16">
-      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-8">
-          <h2 class="text-3xl font-bold mb-4">🚀 Premium {platform} Downloader App</h2>
-          <p class="text-xl opacity-90 mb-6">{premiumApp.description}</p>
-          <div class="text-4xl font-bold mb-2">{premiumApp.price}</div>
-          <p class="opacity-80">One-time purchase • Lifetime updates</p>
-        </div>
-        
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-          <div>
-            <h3 class="text-2xl font-semibold mb-6">Premium Features:</h3>
-            <div class="space-y-3">
-              {premiumApp.features.map((feature) => (
-                <div class="flex items-start space-x-3">
-                  <div class="text-yellow-400 text-lg">⭐</div>
-                  <p class="text-lg">{feature}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-          
-          <div class="text-center">
-            <div class="bg-white/10 backdrop-blur-sm rounded-lg p-6 mb-6">
-              <h4 class="text-xl font-semibold mb-4">Get {premiumApp.name}</h4>
-              <p class="mb-6 opacity-90">Professional-grade {platform.toLowerCase()} downloading with advanced features</p>
-              <div class="space-y-3">
-                <a 
-                  href={premiumApp.buyLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="block bg-yellow-500 hover:bg-yellow-600 text-black font-bold px-8 py-4 rounded-lg transition-colors"
-                >
-                  💳 Buy Now - {premiumApp.price}
-                </a>
-                {premiumApp.demoLink && (
-                  <a 
-                    href={premiumApp.demoLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="block bg-white/20 hover:bg-white/30 px-8 py-3 rounded-lg transition-colors"
-                  >
-                    🎥 Watch Demo
-                  </a>
-                )}
-              </div>
-            </div>
-            <p class="text-sm opacity-70">✅ 30-day money-back guarantee</p>
-          </div>
-        </div>
-      </div>
-    </section>
-  )}
-
-  <!-- Free Tutorial Section -->
-  <section class="py-16 bg-gray-50">
+  <section class="py-16">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl p-8">
         <div class="text-center">

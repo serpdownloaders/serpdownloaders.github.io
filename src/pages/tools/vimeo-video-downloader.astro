@@ -1,35 +1,18 @@
 ---
 import ToolTemplate from '../../layouts/ToolTemplate.astro';
 
-const premiumAppCTA = {
-  name: "Pro Vimeo Downloader",
-  description: "Professional desktop application for bulk downloading, queue management, and advanced Vimeo video processing.",
-  buyLink: "https://serp.ly/vimeo-video-downloader",
-  demoLink: "https://youtu.be/-_zu7XgFuKs",
-  features: [
-    "Bulk download entire Vimeo channels and playlists",
-    "Download private/password protected Vimeo videos",
-    "Multiple quality options (4K, 1080p, 720p, 480p)",
-    "Queue management with pause/resume functionality",
-    "Automatic subtitle downloads in multiple languages",
-    "Built-in video converter and compressor",
-    "Scheduled downloads and automation",
-    "No rate limits or restrictions"
-  ]
-};
-
 const platform = "Vimeo";
 const description = "Download Vimeo videos quickly and easily. Free, secure, and no software installation required.";
 
 const features = [
-  "✓ Download Vimeo videos in high quality",
-  "✓ No software installation required - works in your browser",
-  "✓ Completely free with no registration needed",
-  "✓ Fast download speeds and reliable service",
-  "✓ Mobile-friendly interface",
-  "✓ Privacy-focused - no data stored",
-  "✓ Support for multiple formats",
-  "✓ Secure downloads with HTTPS encryption"
+  "Download Vimeo videos in high quality",
+  "No software installation required - works in your browser",
+  "Completely free with no registration needed",
+  "Fast download speeds and reliable service",
+  "Mobile-friendly interface",
+  "Privacy-focused - no data stored",
+  "Support for multiple formats",
+  "Secure downloads with HTTPS encryption"
 ];
 
 const instructions = [
@@ -65,40 +48,21 @@ const faqs = [
     answer: "No! Our Vimeo downloader works entirely in your web browser. No software installation required."
   },
   {
+    question: "Is this service free?",
+    answer: "Yes, our downloader is completely free with no hidden costs or premium features."
+  },
+  {
+    question: "Is my data safe?",
+    answer: "Yes, we don't store your downloads or personal information. All downloads are processed securely."
+  },
+  {
     question: "What video quality can I download?",
-    answer: "We support the original Vimeo video quality, typically ranging from 480p to 1080p HD, depending on what the creator uploaded."
-  },
-  {
-    question: "Can I download private Vimeo videos?",
-    answer: "Our free tool can only download public Vimeo videos. For private or password-protected videos, check out our premium desktop application."
-  },
-  {
-    question: "Are there any limits on downloads?",
-    answer: "Our free online tool has reasonable usage limits to ensure fair access for everyone. For unlimited downloads, consider our premium app."
+    answer: "We support the original Vimeo video quality, typically ranging from 480p to 4K, depending on the original upload."
   }
 ];
 
-const relatedTools = ["YouTube", "TikTok", "Instagram", "Twitter", "Facebook"];
+const relatedTools = ["YouTube", "TikTok", "Instagram", "PDF", "Twitter"];
 ---
-
-<section class="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-8 flex flex-col md:flex-row items-center gap-6">
-  <div class="flex-1">
-    <h2 class="text-2xl font-bold mb-2">Upgrade: Pro Vimeo Downloader</h2>
-    <p class="mb-3">Professional desktop app for bulk Vimeo downloads, private videos, subtitles, and more.</p>
-    <ul class="list-disc ml-6 mb-3 text-sm">
-      <li>Bulk download entire Vimeo channels and playlists</li>
-      <li>Download private/password protected Vimeo videos</li>
-      <li>Multiple quality options (4K, 1080p, 720p, 480p)</li>
-      <li>Queue management with pause/resume functionality</li>
-      <li>Automatic subtitle downloads in multiple languages</li>
-      <li>Built-in video converter and compressor</li>
-      <li>Scheduled downloads and automation</li>
-      <li>No rate limits or restrictions</li>
-    </ul>
-    <a href="https://serp.ly/vimeo-video-downloader" class="inline-block bg-blue-600 text-white px-5 py-2 rounded font-semibold hover:bg-blue-700 transition">Get Pro Vimeo Downloader</a>
-    <a href="https://youtu.be/-_zu7XgFuKs" target="_blank" rel="noopener" class="ml-4 text-blue-700 underline">Watch Demo</a>
-  </div>
-</section>
 
 <ToolTemplate 
   platform={platform}
@@ -107,11 +71,4 @@ const relatedTools = ["YouTube", "TikTok", "Instagram", "Twitter", "Facebook"];
   instructions={instructions}
   faqs={faqs}
   relatedTools={relatedTools}
-  premiumApp={{
-    name: premiumAppCTA.name,
-    description: premiumAppCTA.description,
-    buyLink: premiumAppCTA.buyLink,
-    demoLink: premiumAppCTA.demoLink,
-    features: premiumAppCTA.features
-  }}
 />
