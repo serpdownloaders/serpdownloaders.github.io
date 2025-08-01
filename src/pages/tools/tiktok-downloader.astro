@@ -1,16 +1,11 @@
 ---
 import ToolTemplate from '../../layouts/ToolTemplate.astro';
 
-const platform = "TikTok";
-const description = "Download TikTok videos without watermark in HD quality. Save TikTok content to your device instantly.";
-
-// Premium app configuration
-const premiumApp = {
+const premiumAppCTA = {
   name: "Pro TikTok Downloader",
-  description: "Professional desktop application for bulk downloading TikTok content, profile management, and advanced video processing",
-  price: "$29.99",
-  buyLink: "https://your-store-link.com/tiktok-downloader", // Replace with your actual store link
-  demoLink: "https://your-demo-link.com/tiktok-demo", // Optional: Replace with demo video
+  description: "Professional desktop application for bulk downloading TikTok content, profile management, and advanced video processing.",
+  buyLink: "https://serp.ly/tiktok-downloader",
+  demoLink: "https://www.youtube.com/watch?v=Qw8r6Qw8r6Q", // Replace with actual TikTok YouTube video if different
   features: [
     "Bulk download entire TikTok profiles and hashtags",
     "Download private/follower-only TikTok content",
@@ -23,15 +18,18 @@ const premiumApp = {
   ]
 };
 
+const platform = "TikTok";
+const description = "Download TikTok videos without watermark in HD quality. Save TikTok content to your device instantly.";
+
 const features = [
-  "Download TikTok videos without watermark",
-  "HD quality downloads (up to 1080p)",
-  "Save TikTok audio as MP3 files",
-  "No app installation required",
-  "Works on all devices (mobile, desktop, tablet)",
-  "Completely free and unlimited downloads",
-  "Fast processing and download speeds",
-  "Privacy-focused - no data stored"
+  "✓ Download TikTok videos without watermark",
+  "✓ HD quality downloads (up to 1080p)",
+  "✓ Save TikTok audio as MP3 files",
+  "✓ No app installation required",
+  "✓ Works on all devices (mobile, desktop, tablet)",
+  "✓ Completely free and unlimited downloads",
+  "✓ Fast processing and download speeds",
+  "✓ Privacy-focused - no data stored"
 ];
 
 const instructions = [
@@ -68,6 +66,25 @@ const faqs = [
 const relatedTools = ["YouTube", "Instagram", "Twitter", "Snapchat", "Facebook"];
 ---
 
+<section class="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-8 flex flex-col md:flex-row items-center gap-6">
+  <div class="flex-1">
+    <h2 class="text-2xl font-bold mb-2">Upgrade: Pro TikTok Downloader</h2>
+    <p class="mb-3">Professional desktop app for bulk TikTok downloads, private content, watermark removal, and more.</p>
+    <ul class="list-disc ml-6 mb-3 text-sm">
+      <li>Bulk download entire TikTok profiles and hashtags</li>
+      <li>Download private/follower-only TikTok content</li>
+      <li>Multiple quality options (4K, 1080p, 720p, 480p)</li>
+      <li>Watermark removal with advanced processing</li>
+      <li>Automatic hashtag and mention extraction</li>
+      <li>Batch processing with queue management</li>
+      <li>Video analytics and engagement metrics</li>
+      <li>Export content with metadata and captions</li>
+    </ul>
+    <a href="https://serp.ly/tiktok-downloader" class="inline-block bg-blue-600 text-white px-5 py-2 rounded font-semibold hover:bg-blue-700 transition">Get Pro TikTok Downloader</a>
+    <a href="https://www.youtube.com/watch?v=Qw8r6Qw8r6Q" target="_blank" rel="noopener" class="ml-4 text-blue-700 underline">Watch Demo</a>
+  </div>
+</section>
+
 <ToolTemplate 
   platform={platform}
   description={description}
@@ -75,5 +92,11 @@ const relatedTools = ["YouTube", "Instagram", "Twitter", "Snapchat", "Facebook"]
   instructions={instructions}
   faqs={faqs}
   relatedTools={relatedTools}
-  premiumApp={premiumApp}
+  premiumApp={{
+    name: premiumAppCTA.name,
+    description: premiumAppCTA.description,
+    buyLink: premiumAppCTA.buyLink,
+    demoLink: premiumAppCTA.demoLink,
+    features: premiumAppCTA.features
+  }}
 />

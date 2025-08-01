@@ -1,0 +1,118 @@
+---
+import ToolTemplate from '../../layouts/ToolTemplate.astro';
+
+const premiumAppCTA = {
+  name: "Pro Skool Downloader",
+  description: "Professional desktop application for bulk downloading Skool courses, community content, and educational materials.",
+  buyLink: "https://serp.ly/skool-video-downloader",
+  demoLink: "https://www.youtube.com/watch?v=J9eetd89HZk",
+  features: [
+    "Bulk download entire Skool courses and communities",
+    "Download private/member-only Skool content",
+    "Multiple quality options (4K, 1080p, 720p, 480p)",
+    "Course structure organization and file naming",
+    "Automatic subtitle downloads in multiple languages",
+    "Progress tracking and resume functionality",
+    "Batch processing with queue management",
+    "Export course materials as organized folders"
+  ]
+};
+
+const platform = "Skool";
+const description = "Download Skool course videos and content quickly and easily. Free, secure, and no software installation required.";
+
+const features = [
+  "✓ Download Skool videos and course content in high quality",
+  "✓ No software installation required - works in your browser",
+  "✓ Completely free with no registration needed",
+  "✓ Fast download speeds and reliable service",
+  "✓ Mobile-friendly interface",
+  "✓ Privacy-focused - no data stored",
+  "✓ Support for multiple formats",
+  "✓ Secure downloads with HTTPS encryption"
+];
+
+const instructions = [
+  {
+    step: 1,
+    text: "Copy the Skool video or course URL from your browser"
+  },
+  {
+    step: 2,
+    text: "Paste the URL in the input field above"
+  },
+  {
+    step: 3,
+    text: "Click the 'Download' button"
+  },
+  {
+    step: 4,
+    text: "Choose your preferred quality and format"
+  },
+  {
+    step: 5,
+    text: "Your download will start automatically"
+  }
+];
+
+const faqs = [
+  {
+    question: "Is it legal to download Skool content?",
+    answer: "Downloading Skool content you have legitimate access to for personal use is generally acceptable, but always respect copyright laws and platform terms of service."
+  },
+  {
+    question: "Do I need to install any software?",
+    answer: "No! Our Skool downloader works entirely in your web browser. No software installation required."
+  },
+  {
+    question: "What content quality can I download?",
+    answer: "We support the original Skool video quality, typically ranging from 480p to 1080p HD, depending on what the course creator uploaded."
+  },
+  {
+    question: "Can I download private Skool courses?",
+    answer: "Our free tool can only download publicly accessible Skool content. For private courses and bulk downloads, check out our premium desktop application."
+  },
+  {
+    question: "Are there any limits on downloads?",
+    answer: "Our free online tool has reasonable usage limits to ensure fair access for everyone. For unlimited downloads, consider our premium app."
+  }
+];
+
+const relatedTools = ["YouTube", "Vimeo", "TikTok", "Instagram", "Facebook"];
+---
+
+<!-- Premium App CTA at the top -->
+<section class="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-8 flex flex-col md:flex-row items-center gap-6">
+  <div class="flex-1">
+    <h2 class="text-2xl font-bold mb-2">Upgrade: Pro Skool Downloader</h2>
+    <p class="mb-3">Professional desktop app for bulk Skool downloads, private content, subtitles, and more.</p>
+    <ul class="list-disc ml-6 mb-3 text-sm">
+      <li>Bulk download entire Skool courses and communities</li>
+      <li>Download private/member-only Skool content</li>
+      <li>Multiple quality options (4K, 1080p, 720p, 480p)</li>
+      <li>Course structure organization and file naming</li>
+      <li>Automatic subtitle downloads in multiple languages</li>
+      <li>Progress tracking and resume functionality</li>
+      <li>Batch processing with queue management</li>
+      <li>Export course materials as organized folders</li>
+    </ul>
+    <a href="https://serp.ly/skool-video-downloader" class="inline-block bg-blue-600 text-white px-5 py-2 rounded font-semibold hover:bg-blue-700 transition">Get Pro Skool Downloader</a>
+    <a href="https://www.youtube.com/watch?v=J9eetd89HZk" target="_blank" rel="noopener" class="ml-4 text-blue-700 underline">Watch Demo</a>
+  </div>
+</section>
+
+<ToolTemplate 
+  platform={platform}
+  description={description}
+  features={features}
+  instructions={instructions}
+  faqs={faqs}
+  relatedTools={relatedTools}
+  premiumApp={{
+    name: premiumAppCTA.name,
+    description: premiumAppCTA.description,
+    buyLink: premiumAppCTA.buyLink,
+    demoLink: premiumAppCTA.demoLink,
+    features: premiumAppCTA.features
+  }}
+/>
