@@ -6,11 +6,19 @@ export interface Props {
   instructions: { step: number; text: string }[];
   faqs: { question: string; answer: string }[];
   relatedTools?: string[];
+  premiumApp?: {
+    name: string;
+    description: string;
+    price: string;
+    features: string[];
+    buyLink: string;
+    demoLink?: string;
+  };
 }
 
 import Layout from '../layouts/Layout.astro';
 
-const { platform, description, features, instructions, faqs, relatedTools } = Astro.props;
+const { platform, description, features, instructions, faqs, relatedTools, premiumApp } = Astro.props;
 const title = `${platform} Downloader - Free Online ${platform} Video & Content Downloader`;
 const metaDescription = `Download ${platform} videos, images and content for free. Fast, secure, no software required. ${description}`;
 const keywords = `${platform.toLowerCase()} downloader, download ${platform.toLowerCase()} videos, ${platform.toLowerCase()} content downloader, free ${platform.toLowerCase()} downloader`;
@@ -118,7 +126,64 @@ const keywords = `${platform.toLowerCase()} downloader, download ${platform.toLo
   )}
 
   <!-- Tutorial Article Section -->
-  <section class="py-16">
+    <!-- Premium App Section -->
+  {premiumApp && (
+    <section class="bg-gradient-to-r from-purple-600 to-blue-600 text-white py-16">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-8">
+          <h2 class="text-3xl font-bold mb-4">🚀 Premium {platform} Downloader App</h2>
+          <p class="text-xl opacity-90 mb-6">{premiumApp.description}</p>
+          <div class="text-4xl font-bold mb-2">{premiumApp.price}</div>
+          <p class="opacity-80">One-time purchase • Lifetime updates</p>
+        </div>
+        
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+          <div>
+            <h3 class="text-2xl font-semibold mb-6">Premium Features:</h3>
+            <div class="space-y-3">
+              {premiumApp.features.map((feature) => (
+                <div class="flex items-start space-x-3">
+                  <div class="text-yellow-400 text-lg">⭐</div>
+                  <p class="text-lg">{feature}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+          
+          <div class="text-center">
+            <div class="bg-white/10 backdrop-blur-sm rounded-lg p-6 mb-6">
+              <h4 class="text-xl font-semibold mb-4">Get {premiumApp.name}</h4>
+              <p class="mb-6 opacity-90">Professional-grade {platform.toLowerCase()} downloading with advanced features</p>
+              <div class="space-y-3">
+                <a 
+                  href={premiumApp.buyLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="block bg-yellow-500 hover:bg-yellow-600 text-black font-bold px-8 py-4 rounded-lg transition-colors"
+                >
+                  💳 Buy Now - {premiumApp.price}
+                </a>
+                {premiumApp.demoLink && (
+                  <a 
+                    href={premiumApp.demoLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="block bg-white/20 hover:bg-white/30 px-8 py-3 rounded-lg transition-colors"
+                  >
+                    🎥 Watch Demo
+                  </a>
+                )}
+              </div>
+            </div>
+            <p class="text-sm opacity-70">✅ 30-day money-back guarantee</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- Free Tutorial Section -->
+  <section class="py-16 bg-gray-50">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl p-8">
         <div class="text-center">

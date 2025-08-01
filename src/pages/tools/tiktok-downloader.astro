@@ -4,6 +4,25 @@ import ToolTemplate from '../../layouts/ToolTemplate.astro';
 const platform = "TikTok";
 const description = "Download TikTok videos without watermark in HD quality. Save TikTok content to your device instantly.";
 
+// Premium app configuration
+const premiumApp = {
+  name: "Pro TikTok Downloader",
+  description: "Professional desktop application for bulk downloading TikTok content, profile management, and advanced video processing",
+  price: "$29.99",
+  buyLink: "https://your-store-link.com/tiktok-downloader", // Replace with your actual store link
+  demoLink: "https://your-demo-link.com/tiktok-demo", // Optional: Replace with demo video
+  features: [
+    "Bulk download entire TikTok profiles and hashtags",
+    "Download private/follower-only TikTok content",
+    "Multiple quality options (4K, 1080p, 720p, 480p)",
+    "Watermark removal with advanced processing",
+    "Automatic hashtag and mention extraction",
+    "Batch processing with queue management",
+    "Video analytics and engagement metrics",
+    "Export content with metadata and captions"
+  ]
+};
+
 const features = [
   "Download TikTok videos without watermark",
   "HD quality downloads (up to 1080p)",
@@ -56,4 +75,5 @@ const relatedTools = ["YouTube", "Instagram", "Twitter", "Snapchat", "Facebook"]
   instructions={instructions}
   faqs={faqs}
   relatedTools={relatedTools}
+  premiumApp={premiumApp}
 />
