@@ -1,0 +1,59 @@
+---
+import ToolTemplate from '../../layouts/ToolTemplate.astro';
+
+const platform = "TikTok";
+const description = "Download TikTok videos without watermark in HD quality. Save TikTok content to your device instantly.";
+
+const features = [
+  "Download TikTok videos without watermark",
+  "HD quality downloads (up to 1080p)",
+  "Save TikTok audio as MP3 files",
+  "No app installation required",
+  "Works on all devices (mobile, desktop, tablet)",
+  "Completely free and unlimited downloads",
+  "Fast processing and download speeds",
+  "Privacy-focused - no data stored"
+];
+
+const instructions = [
+  { step: 1, text: "Open TikTok and find the video you want to download" },
+  { step: 2, text: "Tap the 'Share' button and copy the video link" },
+  { step: 3, text: "Paste the TikTok URL in the input field above" },
+  { step: 4, text: "Click 'Download' to process the video" },
+  { step: 5, text: "Choose to download video (with/without watermark) or audio only" }
+];
+
+const faqs = [
+  {
+    question: "Can I download TikTok videos without the watermark?",
+    answer: "Yes! Our TikTok downloader removes the watermark automatically, giving you clean video files perfect for reposting or personal use."
+  },
+  {
+    question: "What video quality can I download?",
+    answer: "We support the original TikTok video quality, which is typically HD (1080p). The download quality matches what's available on TikTok's servers."
+  },
+  {
+    question: "Can I download TikTok audio only?",
+    answer: "Absolutely! You can extract just the audio from TikTok videos and save it as an MP3 file for your music collection."
+  },
+  {
+    question: "Is it safe to use this downloader?",
+    answer: "Yes, our TikTok downloader is completely safe. We don't store your downloads or personal information, and there's no malware or viruses."
+  },
+  {
+    question: "Does this work with private TikTok accounts?",
+    answer: "No, we can only download videos from public TikTok accounts. Private account videos are not accessible through our downloader."
+  }
+];
+
+const relatedTools = ["YouTube", "Instagram", "Twitter", "Snapchat", "Facebook"];
+---
+
+<ToolTemplate 
+  platform={platform}
+  description={description}
+  features={features}
+  instructions={instructions}
+  faqs={faqs}
+  relatedTools={relatedTools}
+/>

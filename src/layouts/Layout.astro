@@ -1,0 +1,126 @@
+---
+export interface Props {
+  title: string;
+  description: string;
+  keywords?: string;
+  canonical?: string;
+  ogImage?: string;
+}
+
+const { title, description, keywords, canonical, ogImage } = Astro.props;
+const site = 'https://serpdownloaders.github.io';
+const canonicalURL = canonical || new URL(Astro.url.pathname, site).href;
+const ogImageURL = ogImage || `${site}/og-image.jpg`;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={description} />
+    {keywords && <meta name="keywords" content={keywords} />}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href={canonicalURL} />
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:image" content={ogImageURL} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="SERP Downloaders" />
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageURL} />
+    
+    <!-- Schema.org JSON-LD -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "SERP Downloaders",
+        "description": "Free online downloaders for videos, images, and content from popular platforms",
+        "url": "https://serpdownloaders.github.io",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://serpdownloaders.github.io/tools/{search_term_string}-downloader"
+          },
+          "query-input": "required name=search_term_string"
+        }
+      }
+    </script>
+    
+    <title>{title}</title>
+  </head>
+  <body class="min-h-screen bg-gray-50">
+    <header class="bg-white shadow-sm border-b">
+      <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between h-16">
+          <div class="flex items-center">
+            <a href="/" class="text-xl font-bold text-primary-700">
+              SERP Downloaders
+            </a>
+          </div>
+          <div class="hidden md:flex items-center space-x-8">
+            <a href="/tools" class="text-gray-700 hover:text-primary-600 transition-colors">Tools</a>
+            <a href="/blog" class="text-gray-700 hover:text-primary-600 transition-colors">Blog</a>
+            <a href="/about" class="text-gray-700 hover:text-primary-600 transition-colors">About</a>
+            <a href="/contact" class="text-gray-700 hover:text-primary-600 transition-colors">Contact</a>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer class="bg-gray-900 text-white mt-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <div>
+            <h3 class="text-lg font-semibold mb-4">SERP Downloaders</h3>
+            <p class="text-gray-400">Free online downloaders for videos, images, and content from popular platforms.</p>
+          </div>
+          <div>
+            <h4 class="text-md font-semibold mb-4">Popular Tools</h4>
+            <ul class="space-y-2 text-gray-400">
+              <li><a href="/tools/youtube-downloader" class="hover:text-white transition-colors">YouTube Downloader</a></li>
+              <li><a href="/tools/tiktok-downloader" class="hover:text-white transition-colors">TikTok Downloader</a></li>
+              <li><a href="/tools/instagram-downloader" class="hover:text-white transition-colors">Instagram Downloader</a></li>
+              <li><a href="/tools/pdf-downloader" class="hover:text-white transition-colors">PDF Downloader</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="text-md font-semibold mb-4">Learn</h4>
+            <ul class="space-y-2 text-gray-400">
+              <li><a href="/blog" class="hover:text-white transition-colors">Blog</a></li>
+              <li><a href="/how-to-download-videos" class="hover:text-white transition-colors">How to Download Videos</a></li>
+              <li><a href="/how-to-download-pdfs" class="hover:text-white transition-colors">How to Download PDFs</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="text-md font-semibold mb-4">Legal</h4>
+            <ul class="space-y-2 text-gray-400">
+              <li><a href="/privacy" class="hover:text-white transition-colors">Privacy Policy</a></li>
+              <li><a href="/terms" class="hover:text-white transition-colors">Terms of Service</a></li>
+              <li><a href="/affiliate-disclaimer" class="hover:text-white transition-colors">Affiliate Disclaimer</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+          <p>&copy; 2025 SERP Downloaders. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

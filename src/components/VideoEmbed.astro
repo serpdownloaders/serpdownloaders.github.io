@@ -1,0 +1,60 @@
+---
+export interface Props {
+  videoId: string;
+  title?: string;
+  description?: string;
+  platform?: 'youtube' | 'vimeo';
+}
+
+const { videoId, title, description, platform = 'youtube' } = Astro.props;
+
+// Extract video ID from URL if full URL is provided
+function extractVideoId(id: string, platform: string): string {
+  if (platform === 'youtube') {
+    // Handle various YouTube URL formats
+    const youtubeRegex = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/;
+    const match = id.match(youtubeRegex);
+    return match ? match[1] : id;
+  }
+  return id;
+}
+
+const cleanVideoId = extractVideoId(videoId, platform);
+---
+
+<div class="video-container my-8">
+  {platform === 'youtube' && (
+    <div class="relative w-full h-0 pb-[56.25%] rounded-lg overflow-hidden shadow-lg">
+      <iframe
+        class="absolute top-0 left-0 w-full h-full"
+        src={`https://www.youtube.com/embed/${cleanVideoId}?rel=0&modestbranding=1`}
+        title={title || "Video tutorial"}
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+      ></iframe>
+    </div>
+  )}
+  
+  {platform === 'vimeo' && (
+    <div class="relative w-full h-0 pb-[56.25%] rounded-lg overflow-hidden shadow-lg">
+      <iframe
+        class="absolute top-0 left-0 w-full h-full"
+        src={`https://player.vimeo.com/video/${cleanVideoId}?title=0&byline=0&portrait=0`}
+        title={title || "Video tutorial"}
+        frameborder="0"
+        allow="autoplay; fullscreen; picture-in-picture"
+        allowfullscreen
+      ></iframe>
+    </div>
+  )}
+  
+  {title && (
+    <div class="mt-4 text-center">
+      <h4 class="text-lg font-semibold text-gray-900">{title}</h4>
+      {description && (
+        <p class="text-gray-600 mt-2">{description}</p>
+      )}
+    </div>
+  )}
+</div>

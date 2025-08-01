@@ -1,0 +1,9 @@
+{
+  "extends": "astro/tsconfigs/base",
+  "include": ["src/**/*", "astro.config.mjs"],
+  "exclude": ["node_modules", "dist"],
+  "compilerOptions": {
+    "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true
+  }
+}

@@ -1,0 +1,275 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+// Parse the sitemap to get all tool pages
+const sitemapContent = `"type","page","url"
+"core","{{ SITENAME }}","/"
+"core","About","/about"
+"core","Contact","/contact"
+"core","Privacy Policy","/privacy"
+"core","Terms","/terms"
+"core","Affiliate Disclaimer","/affiliate-disclaimer"
+"core","Blog","/blog"
+"posts","How to Download Skool Videos","/how-to-download-skool-videos"
+"posts","How to Download Loom Videos","/how-to-download-loom-videos"
+"posts","How to Download Vimeo Videos","/how-to-download-vimeo-videos"
+"posts","How to Download Tiktok Videos","/how-to-download-tiktok-videos"
+"posts","How to Download PDFs","/how-to-download-pdfs"
+"tools","Downloaders Apps & Tools","/tools/"
+"tools","PDF Downloader","/tools/pdf-downloader"
+"tools","Skool Video Downloader","/tools/skool-video-downloader"
+"tools","TikTok Downloader","/tools/tiktok-downloader"
+"tools","Vimeo Video Downloader","/tools/vimeo-video-downloader"
+"tools","PDF Downloader","/tools/pdf-downloader"
+"tools","Loom Video Downloader","/tools/loom-video-downloader"
+"tools","YouTube Downloader","/tools/youtube-downloader"
+"tools","Instagram Downloader","/tools/instagram-downloader"
+"tools","Twitter Downloader","/tools/twitter-downloader"
+"tools","SoundCloud Downloader","/tools/soundcloud-downloader"
+"tools","pornhub downloader","/tools/pornhub-downloader"
+"tools","pinterest downloader","/tools/pinterest-downloader"
+"tools","facebook downloader","/tools/facebook-downloader"
+"tools","scribd downloader","/tools/scribd-downloader"
+"tools","onlyfans downloader","/tools/onlyfans-downloader"
+"tools","dailymotion downloader","/tools/dailymotion-downloader"
+"tools","thumbnail downloader","/tools/thumbnail-downloader"
+"tools","erome downloader","/tools/erome-downloader"
+"tools","twitch downloader","/tools/twitch-downloader"
+"tools","123movies downloader","/tools/123movies-downloader"
+"tools","getty images downloader","/tools/getty-images-downloader"
+"tools","terabox downloader","/tools/terabox-downloader"
+"tools","snapchat downloader","/tools/snapchat-downloader"
+"tools","vk downloader","/tools/vk-downloader"
+"tools","m3u8 downloader","/tools/m3u8-downloader"
+"tools","patreon downloader","/tools/patreon-downloader"
+"tools","soundgasm downloader","/tools/soundgasm-downloader"
+"tools","tumblr downloader","/tools/tumblr-downloader"
+"tools","bilibili downloader","/tools/bilibili-downloader"
+"tools","erothots downloader","/tools/erothots-downloader"
+"tools","freepik downloader","/tools/freepik-downloader"
+"tools","deviantart downloader","/tools/deviantart-downloader"
+"tools","kick clip downloader","/tools/kick-clip-downloader"
+"tools","giphy downloader","/tools/giphy-downloader"
+"tools","internet archive downloader","/tools/internet-archive-downloader"
+"tools","shutterstock downloader","/tools/shutterstock-downloader"
+"tools","amazon video downloader","/tools/amazon-video-downloader"
+"tools","alamy downloader","/tools/alamy-downloader"
+"tools","istock downloader","/tools/istock-downloader"
+"tools","netflix downloader","/tools/netflix-downloader"
+"tools","redtube downloader","/tools/redtube-downloader"
+"tools","tubi downloader","/tools/tubi-downloader"
+"tools","flickr downloader","/tools/flickr-downloader"
+"tools","stream downloader","/tools/stream-downloader"
+"tools","telegram downloader","/tools/telegram-downloader"
+"tools","udemy downloader","/tools/udemy-downloader"
+"tools","adobe stock downloader","/tools/adobe-stock-downloader"
+"tools","nicovideo downloader","/tools/nicovideo-downloader"
+"tools","wistia downloader","/tools/wistia-downloader"
+"tools","dreamstime downloader","/tools/dreamstime-downloader"
+"tools","stockvault downloader","/tools/stockvault-downloader"
+"tools","hulu downloader","/tools/hulu-downloader"
+"tools","depositphotos downloader","/tools/depositphotos-downloader"
+"tools","sprout video downloader","/tools/sprout-video-downloader"
+"tools","camsoda downloader","/tools/camsoda-downloader"
+"tools","chaturbate downloader","/tools/chaturbate-downloader"
+"tools","stripchat downloader","/tools/stripchat-downloader"
+"tools","canva downloader","/tools/canva-downloader"
+"tools","rawpixel downloader","/tools/rawpixel-downloader"
+"tools","storyblocks downloader","/tools/storyblocks-downloader"
+"tools","coursera downloader","/tools/coursera-downloader"
+"tools","kajabi downloader","/tools/kajabi-downloader"
+"tools","linkedin learning downloader","/tools/linkedin-learning-downloader"
+"tools","myfreecams downloader","/tools/myfreecams-downloader"
+"tools","teachable downloader","/tools/teachable-downloader"
+"tools","moodle downloader","/tools/moodle-downloader"
+"tools","123rf downloader","/tools/123rf-downloader"
+"tools","creative market downloader","/tools/creative-market-downloader"
+"tools","flicker downloader","/tools/flicker-downloader"
+"tools","unsplash downloader","/tools/unsplash-downloader"
+"tools","bongacams downloader","/tools/bongacams-downloader"
+"tools","khan academy downloader","/tools/khan-academy-downloader"
+"tools","skillshare downloader","/tools/skillshare-downloader"
+"tools","thinkific downloader","/tools/thinkific-downloader"
+"tools","whop downloader","/tools/whop-downloader"
+"tools","circle downloader","/tools/circle-downloader"
+"tools","clientclub downloader","/tools/clientclub-downloader"
+"tools","gohighlevel downloader","/tools/gohighlevel-downloader"
+"tools","gokollab downloader","/tools/gokollab-downloader"
+"tools","learndash downloader","/tools/learndash-downloader"
+"tools","learnworlds downloader","/tools/learnworlds-downloader"
+"tools","livejasmin downloader","/tools/livejasmin-downloader"
+"tools","podia downloader","/tools/podia-downloader"
+"tools","pexels downloader","/tools/pexels-downloader"
+"tools","pixabay downloader","/tools/pixabay-downloader"
+"tools","stocksy downloader","/tools/stocksy-downloader"
+"tools","vectorstock downloader","/tools/vectorstock-downloader"`;
+
+// Parse the sitemap and extract tool entries
+const lines = sitemapContent.split('\n').slice(1); // Skip header
+const tools = lines
+  .filter(line => line.startsWith('"tools"'))
+  .map(line => {
+    const matches = line.match(/"([^"]+)","([^"]+)","([^"]+)"/);
+    if (matches) {
+      return {
+        name: matches[2],
+        url: matches[3]
+      };
+    }
+    return null;
+  })
+  .filter((tool): tool is { name: string; url: string } => tool !== null)
+  .filter(tool => tool.url !== '/tools/'); // Remove the main tools page
+
+// Categorize tools
+const videoTools = tools.filter(tool => 
+  tool.name.toLowerCase().includes('video') || 
+  ['YouTube', 'TikTok', 'Instagram', 'Vimeo', 'Twitch', 'Netflix', 'Hulu', 'Amazon Video'].some(platform => 
+    tool.name.toLowerCase().includes(platform.toLowerCase())
+  )
+);
+
+const imageTools = tools.filter(tool => 
+  ['Pinterest', 'Getty Images', 'Shutterstock', 'Freepik', 'Adobe Stock', 'Unsplash', 'Pexels', 'Pixabay'].some(platform => 
+    tool.name.toLowerCase().includes(platform.toLowerCase())
+  )
+);
+
+const educationTools = tools.filter(tool => 
+  ['Udemy', 'Coursera', 'Khan Academy', 'Skillshare', 'LinkedIn Learning', 'Teachable', 'Moodle'].some(platform => 
+    tool.name.toLowerCase().includes(platform.toLowerCase())
+  )
+);
+
+const otherTools = tools.filter(tool => 
+  !videoTools.includes(tool) && !imageTools.includes(tool) && !educationTools.includes(tool)
+);
+---
+
+<Layout 
+  title="Free Online Downloaders - 50+ Tools for Video, Image & Content Downloads"
+  description="Complete collection of free online downloaders for YouTube, TikTok, Instagram, PDF, and 50+ other platforms. No software required."
+  keywords="online downloaders, video downloader, image downloader, pdf downloader, free download tools"
+>
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-r from-primary-600 to-primary-700 text-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h1 class="text-4xl md:text-5xl font-bold mb-6">
+        All Download Tools
+      </h1>
+      <p class="text-xl mb-8 opacity-90">
+        Choose from 50+ free online downloaders for all major platforms
+      </p>
+      <div class="max-w-md mx-auto">
+        <input 
+          type="search" 
+          placeholder="Search for a platform..."
+          class="w-full px-4 py-3 rounded-lg text-gray-900 border-0"
+          id="search-tools"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- Popular Tools -->
+  <section class="py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-center mb-12">Most Popular Tools</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <a href="/tools/youtube-downloader" class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow group">
+          <div class="text-red-600 text-3xl mb-4">📺</div>
+          <h3 class="text-lg font-semibold mb-2 group-hover:text-primary-600">YouTube Downloader</h3>
+          <p class="text-gray-600 text-sm">Download YouTube videos in HD</p>
+        </a>
+        <a href="/tools/tiktok-downloader" class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow group">
+          <div class="text-black text-3xl mb-4">🎵</div>
+          <h3 class="text-lg font-semibold mb-2 group-hover:text-primary-600">TikTok Downloader</h3>
+          <p class="text-gray-600 text-sm">Save TikTok videos without watermark</p>
+        </a>
+        <a href="/tools/instagram-downloader" class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow group">
+          <div class="text-pink-600 text-3xl mb-4">📸</div>
+          <h3 class="text-lg font-semibold mb-2 group-hover:text-primary-600">Instagram Downloader</h3>
+          <p class="text-gray-600 text-sm">Download Instagram photos and videos</p>
+        </a>
+        <a href="/tools/pdf-downloader" class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow group">
+          <div class="text-blue-600 text-3xl mb-4">📄</div>
+          <h3 class="text-lg font-semibold mb-2 group-hover:text-primary-600">PDF Downloader</h3>
+          <p class="text-gray-600 text-sm">Download PDFs from any website</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Video Downloaders -->
+  <section class="bg-gray-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold mb-12">Video Downloaders</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="video-tools">
+        {videoTools.map((tool) => (
+          <a href={tool.url} class="bg-white p-4 rounded-lg shadow hover:shadow-md transition-shadow tool-item">
+            <h3 class="font-semibold text-primary-700 hover:text-primary-800">{tool.name}</h3>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Image Downloaders -->
+  <section class="py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold mb-12">Image & Stock Photo Downloaders</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="image-tools">
+        {imageTools.map((tool) => (
+          <a href={tool.url} class="bg-white p-4 rounded-lg shadow hover:shadow-md transition-shadow tool-item">
+            <h3 class="font-semibold text-primary-700 hover:text-primary-800">{tool.name}</h3>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Education Downloaders -->
+  <section class="bg-gray-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold mb-12">Educational Content Downloaders</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="education-tools">
+        {educationTools.map((tool) => (
+          <a href={tool.url} class="bg-white p-4 rounded-lg shadow hover:shadow-md transition-shadow tool-item">
+            <h3 class="font-semibold text-primary-700 hover:text-primary-800">{tool.name}</h3>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Other Tools -->
+  <section class="py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold mb-12">Other Downloaders</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="other-tools">
+        {otherTools.map((tool) => (
+          <a href={tool.url} class="bg-white p-4 rounded-lg shadow hover:shadow-md transition-shadow tool-item">
+            <h3 class="font-semibold text-primary-700 hover:text-primary-800">{tool.name}</h3>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Simple search functionality
+    document.getElementById('search-tools')?.addEventListener('input', (e) => {
+      const searchTerm = (e.target as HTMLInputElement).value.toLowerCase();
+      const toolItems = document.querySelectorAll('.tool-item');
+      
+      toolItems.forEach((item) => {
+        const toolName = item.querySelector('h3')?.textContent?.toLowerCase() || '';
+        if (toolName.includes(searchTerm)) {
+          (item as HTMLElement).style.display = 'block';
+        } else {
+          (item as HTMLElement).style.display = 'none';
+        }
+      });
+    });
+  </script>
+</Layout>

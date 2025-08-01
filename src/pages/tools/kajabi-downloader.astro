@@ -1,0 +1,76 @@
+---
+import ToolTemplate from '../../layouts/ToolTemplate.astro';
+
+const platform = "kajabi";
+const description = "Download kajabi content quickly and easily. Free, secure, and no software installation required.";
+
+const features = [
+  "Download kajabi content in high quality",
+  "No software installation required - works in your browser",
+  "Completely free with no registration needed",
+  "Fast download speeds and reliable service",
+  "Mobile-friendly interface",
+  "Privacy-focused - no data stored",
+  "Support for multiple formats",
+  "Secure downloads with HTTPS encryption"
+];
+
+const instructions = [
+  {
+    "step": 1,
+    "text": "Copy the kajabi URL from your browser"
+  },
+  {
+    "step": 2,
+    "text": "Paste the URL in the input field above"
+  },
+  {
+    "step": 3,
+    "text": "Click the 'Download' button"
+  },
+  {
+    "step": 4,
+    "text": "Choose your preferred quality and format"
+  },
+  {
+    "step": 5,
+    "text": "Your download will start automatically"
+  }
+];
+
+const faqs = [
+  {
+    "question": "Is it legal to download kajabi content?",
+    "answer": "Downloading kajabi content for personal use is generally acceptable, but always respect copyright laws and platform terms of service."
+  },
+  {
+    "question": "Do I need to install any software?",
+    "answer": "No! Our kajabi downloader works entirely in your web browser. No software installation required."
+  },
+  {
+    "question": "Is this service free?",
+    "answer": "Yes, our downloader is completely free with no hidden costs or premium features."
+  },
+  {
+    "question": "Is my data safe?",
+    "answer": "Yes, we don't store your downloads or personal information. All downloads are processed securely."
+  }
+];
+
+const relatedTools = [
+  "YouTube",
+  "TikTok",
+  "Instagram",
+  "PDF",
+  "Twitter"
+];
+---
+
+<ToolTemplate 
+  platform={platform}
+  description={description}
+  features={features}
+  instructions={instructions}
+  faqs={faqs}
+  relatedTools={relatedTools}
+/>
