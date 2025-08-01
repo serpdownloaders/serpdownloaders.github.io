@@ -27,10 +27,12 @@ const cleanVideoId = extractVideoId(videoId, platform);
     <div class="relative w-full h-0 pb-[56.25%] rounded-lg overflow-hidden shadow-lg">
       <iframe
         class="absolute top-0 left-0 w-full h-full"
-        src={`https://www.youtube.com/embed/${cleanVideoId}?rel=0&modestbranding=1`}
+        src={`https://www.youtube-nocookie.com/embed/${cleanVideoId}?rel=0&modestbranding=1&origin=${Astro.url.origin}`}
         title={title || "Video tutorial"}
-        frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        loading="lazy"
+        referrerpolicy="strict-origin-when-cross-origin"
+        sandbox="allow-scripts allow-same-origin allow-presentation"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         allowfullscreen
       ></iframe>
     </div>
@@ -40,9 +42,11 @@ const cleanVideoId = extractVideoId(videoId, platform);
     <div class="relative w-full h-0 pb-[56.25%] rounded-lg overflow-hidden shadow-lg">
       <iframe
         class="absolute top-0 left-0 w-full h-full"
-        src={`https://player.vimeo.com/video/${cleanVideoId}?title=0&byline=0&portrait=0`}
+        src={`https://player.vimeo.com/video/${cleanVideoId}?title=0&byline=0&portrait=0&dnt=1`}
         title={title || "Video tutorial"}
-        frameborder="0"
+        loading="lazy"
+        referrerpolicy="strict-origin-when-cross-origin"
+        sandbox="allow-scripts allow-same-origin allow-presentation"
         allow="autoplay; fullscreen; picture-in-picture"
         allowfullscreen
       ></iframe>

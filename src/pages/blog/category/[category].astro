@@ -1,0 +1,237 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+
+export async function getStaticPaths() {
+  // Define available categories
+  const categories = [
+    {
+      slug: 'video-downloads',
+      name: 'Video Downloads',
+      description: 'Learn how to download videos from YouTube, TikTok, Instagram, Vimeo, and other popular video platforms.',
+      tags: ['TikTok', 'YouTube', 'Video Download', 'Vimeo', 'Instagram']
+    },
+    {
+      slug: 'document-downloads', 
+      name: 'Document Downloads',
+      description: 'Download PDFs, ebooks, research papers, and documents from various websites and platforms.',
+      tags: ['PDF', 'Document Download', 'Research']
+    },
+    {
+      slug: 'image-downloads',
+      name: 'Image Downloads', 
+      description: 'Save images, photos, and graphics from social media platforms and stock photo sites.',
+      tags: ['Instagram', 'Social Media', 'Photos']
+    },
+    {
+      slug: 'educational-content',
+      name: 'Educational Content',
+      description: 'Download course materials, lectures, and educational videos for offline learning.',
+      tags: ['Skool', 'Udemy', 'Education', 'Course Content', 'Offline Learning']
+    }
+  ];
+
+  return categories.map((category) => {
+    return {
+      params: { category: category.slug },
+      props: { category },
+    };
+  });
+}
+
+const { category } = Astro.props;
+
+// Blog posts data (same as in blog.astro)
+const blogPosts = [
+  {
+    title: "How to Download TikTok Videos Without Watermark",
+    description: "Download TikTok videos without watermarks using our free tools. Complete guide with step-by-step instructions and best practices.",
+    url: "/how-to-download-tiktok-videos",
+    publishDate: "2024-12-01",
+    readTime: "8 min read",
+    tags: ["TikTok", "Video Download", "No Watermark"],
+    featured: true
+  },
+  {
+    title: "How to Download Skool Videos - Complete Guide",
+    description: "Download Skool group videos and course content easily. Learn the best methods to save educational content from Skool platform for offline viewing.",
+    url: "/how-to-download-skool-videos",
+    publishDate: "2024-12-01",
+    readTime: "9 min read",
+    tags: ["Skool", "Education", "Course Content"]
+  },
+  {
+    title: "How to Download Udemy Course Videos",
+    description: "Download Udemy course videos for offline learning. Learn the best methods to save educational content from Udemy platform and study anywhere.",
+    url: "/how-to-download-udemy-courses",
+    publishDate: "2024-12-01",
+    readTime: "10 min read",
+    tags: ["Udemy", "Education", "Offline Learning"]
+  },
+  {
+    title: "How to Download YouTube Videos - Complete Guide 2025",
+    description: "Learn how to download YouTube videos in HD quality with our comprehensive guide. Free tools, methods, and best practices included.",
+    url: "/how-to-download-youtube-videos",
+    publishDate: "2024-11-28",
+    readTime: "10 min read",
+    tags: ["YouTube", "Video Download", "HD Videos"]
+  },
+  {
+    title: "How to Download PDF Files from Any Website",
+    description: "Complete guide to downloading PDF files from websites, research papers, documents, and online libraries. Free methods and tools included.",
+    url: "/how-to-download-pdf-files",
+    publishDate: "2024-11-25",
+    readTime: "6 min read",
+    tags: ["PDF", "Document Download", "Research"]
+  },
+  {
+    title: "How to Download Instagram Content",
+    description: "Learn how to download Instagram photos, videos, stories and reels. Step-by-step guide with free tools and best practices.",
+    url: "/how-to-download-instagram-content",
+    publishDate: "2024-11-22",
+    readTime: "7 min read",
+    tags: ["Instagram", "Social Media", "Photos"]
+  },
+  {
+    title: "How to Download Vimeo Videos",
+    description: "Step-by-step guide to downloading Vimeo videos in high quality. Free tools and methods for saving Vimeo content.",
+    url: "/how-to-download-vimeo-videos",
+    publishDate: "2024-11-20",
+    readTime: "5 min read",
+    tags: ["Vimeo", "Video Download", "HD"]
+  }
+];
+
+// Filter posts by category tags
+const filteredPosts = blogPosts.filter(post => 
+  post.tags.some(tag => category.tags.includes(tag))
+);
+---
+
+<Layout 
+  title={`${category.name} - SERP Downloaders Blog`}
+  description={category.description}
+  keywords={category.tags.join(', ')}
+>
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-r from-primary-600 to-primary-700 text-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <nav class="mb-8">
+        <ol class="flex items-center space-x-2 text-primary-200">
+          <li><a href="/" class="hover:text-white">Home</a></li>
+          <li class="text-primary-300">/</li>
+          <li><a href="/blog" class="hover:text-white">Blog</a></li>
+          <li class="text-primary-300">/</li>
+          <li class="text-white">{category.name}</li>
+        </ol>
+      </nav>
+      
+      <h1 class="text-4xl md:text-5xl font-bold mb-4">
+        {category.name}
+      </h1>
+      <p class="text-xl opacity-90 max-w-3xl">
+        {category.description}
+      </p>
+    </div>
+  </section>
+
+  <!-- Posts Section -->
+  <section class="py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {filteredPosts.length > 0 ? (
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {filteredPosts.map((post) => (
+            <article class="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow overflow-hidden">
+              <div class="p-6">
+                <div class="flex flex-wrap gap-2 mb-3">
+                  {post.tags.slice(0, 2).map((tag) => (
+                    <span class="bg-primary-100 text-primary-700 px-2 py-1 rounded text-xs font-medium">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+                
+                <h3 class="text-xl font-semibold text-gray-900 mb-3 line-clamp-2">
+                  <a href={post.url} class="hover:text-primary-600 transition-colors">
+                    {post.title}
+                  </a>
+                </h3>
+                
+                <p class="text-gray-600 mb-4 line-clamp-3">
+                  {post.description}
+                </p>
+                
+                <div class="flex items-center justify-between text-sm text-gray-500">
+                  <time datetime={post.publishDate}>
+                    {new Date(post.publishDate).toLocaleDateString('en-US', { 
+                      month: 'short', 
+                      day: 'numeric',
+                      year: 'numeric'
+                    })}
+                  </time>
+                  <span>{post.readTime}</span>
+                </div>
+                
+                <div class="mt-4">
+                  <a href={post.url} class="text-primary-600 hover:text-primary-700 font-medium">
+                    Read Guide →
+                  </a>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      ) : (
+        <div class="text-center py-12">
+          <div class="text-6xl mb-4">📝</div>
+          <h2 class="text-2xl font-semibold text-gray-900 mb-4">No posts yet in this category</h2>
+          <p class="text-gray-600 mb-8">We're working on adding more content to this category. Check back soon!</p>
+          <a href="/blog" class="bg-primary-600 text-white px-6 py-3 rounded-lg hover:bg-primary-700 transition-colors">
+            Browse All Posts
+          </a>
+        </div>
+      )}
+    </div>
+  </section>
+
+  <!-- Other Categories -->
+  <section class="py-16 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-center mb-12">Other Categories</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <a href="/blog/category/video-downloads" class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow text-center group">
+          <div class="text-4xl mb-4">📹</div>
+          <h3 class="text-lg font-semibold text-gray-900 group-hover:text-primary-600 mb-2">Video Downloads</h3>
+          <p class="text-gray-600 text-sm">YouTube, TikTok, Instagram, and more</p>
+        </a>
+        
+        <a href="/blog/category/document-downloads" class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow text-center group">
+          <div class="text-4xl mb-4">📄</div>
+          <h3 class="text-lg font-semibold text-gray-900 group-hover:text-primary-600 mb-2">Document Downloads</h3>
+          <p class="text-gray-600 text-sm">PDFs, ebooks, research papers</p>
+        </a>
+        
+        <a href="/blog/category/educational-content" class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow text-center group">
+          <div class="text-4xl mb-4">🎓</div>
+          <h3 class="text-lg font-semibold text-gray-900 group-hover:text-primary-600 mb-2">Educational Content</h3>
+          <p class="text-gray-600 text-sm">Course materials, lectures, tutorials</p>
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+</style>

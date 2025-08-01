@@ -1,0 +1,48 @@
+---
+import Layout from '../layouts/Layout.astro';
+import VideoEmbed from '../components/VideoEmbed.astro';
+---
+
+<Layout title="Video Test Page" description="Testing video embeds">
+  <div class="container mx-auto px-4 py-8">
+    <h1 class="text-3xl font-bold mb-8">Video Embed Test</h1>
+    
+    <div class="space-y-8">
+      <div>
+        <h2 class="text-2xl font-semibold mb-4">Skool Video Test</h2>
+        <VideoEmbed 
+          videoId="tgDmBdReTqA" 
+          title="How to Download Videos from Skool.com using wget (2025 Update) - Step by Step Tutorial"
+          platform="youtube"
+        />
+      </div>
+      
+      <div>
+        <h2 class="text-2xl font-semibold mb-4">Udemy Video Test</h2>
+        <VideoEmbed 
+          videoId="dowl67QPLlg" 
+          title="How to Fix Udemy Black Screen for Mirroring, Screenshots & Screen Recording"
+          platform="youtube"
+        />
+      </div>
+      
+      <div>
+        <h2 class="text-2xl font-semibold mb-4">Vimeo Video Test</h2>
+        <VideoEmbed 
+          videoId="ZnoC6IZg4s4" 
+          title="How to Download Vimeo Videos for Free (Mac & Windows) | No Extensions/Tools Needed (WINDOWS VERSION)"
+          platform="youtube"
+        />
+      </div>
+      
+      <div>
+        <h2 class="text-2xl font-semibold mb-4">PDF Video Test</h2>
+        <VideoEmbed 
+          videoId="buF1BelQ1pA" 
+          title="How to Download Free Books, PDFs | Download Any Book for Free"
+          platform="youtube"
+        />
+      </div>
+    </div>
+  </div>
+</Layout>

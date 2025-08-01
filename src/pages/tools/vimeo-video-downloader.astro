@@ -1,12 +1,14 @@
 ---
 import ToolTemplate from '../../layouts/ToolTemplate.astro';
+import VideoEmbed from '../../components/VideoEmbed.astro';
+import Layout from '../../layouts/Layout.astro';
 
 const platform = "Vimeo Video";
 const description = "Download Vimeo Video content quickly and easily. Free, secure, and no software installation required.";
 
 const features = [
   "Download Vimeo Video content in high quality",
-  "No software installation required - works in your browser",
+  "No software installation required - works in your browser", 
   "Completely free with no registration needed",
   "Fast download speeds and reliable service",
   "Mobile-friendly interface",
@@ -59,18 +61,181 @@ const faqs = [
 
 const relatedTools = [
   "YouTube",
-  "TikTok",
+  "TikTok", 
   "Instagram",
   "PDF",
   "Twitter"
 ];
+
+const title = `${platform} Downloader - Free Online ${platform} Video & Content Downloader`;
+const metaDescription = `Download ${platform} videos, images and content for free. Fast, secure, no software required. ${description}`;
+const keywords = `${platform.toLowerCase()} downloader, download ${platform.toLowerCase()} videos, ${platform.toLowerCase()} content downloader, free ${platform.toLowerCase()} downloader`;
 ---
 
-<ToolTemplate 
-  platform={platform}
-  description={description}
-  features={features}
-  instructions={instructions}
-  faqs={faqs}
-  relatedTools={relatedTools}
-/>
+<Layout 
+  title={title}
+  description={metaDescription}
+  keywords={keywords}
+>
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-r from-primary-600 to-primary-700 text-white py-16">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h1 class="text-4xl md:text-5xl font-bold mb-6">
+        {platform} Downloader
+      </h1>
+      <p class="text-xl mb-8 opacity-90">
+        {description}
+      </p>
+      <div class="bg-white/10 backdrop-blur-sm rounded-lg p-6 mb-8">
+        <div class="flex items-center justify-center mb-4">
+          <input 
+            type="url" 
+            placeholder={`Paste your ${platform} URL here...`}
+            class="w-full max-w-md px-4 py-3 rounded-l-lg text-gray-900 border-0 focus:ring-2 focus:ring-white"
+            id="url-input"
+          />
+          <button 
+            class="bg-primary-700 hover:bg-primary-800 px-6 py-3 rounded-r-lg font-semibold transition-colors"
+            onclick="downloadContent()"
+          >
+            Download
+          </button>
+        </div>
+        <p class="text-sm opacity-80">Paste your {platform} URL and click download</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Video Tutorials Section -->
+  <section class="py-16 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-center mb-12">Video Tutorials</h2>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+        <VideoEmbed 
+          videoId="-_zu7XgFuKs" 
+          title="Download Any Vimeo Video Easily (on Public or Private Web Pages)"
+          platform="youtube"
+        />
+        <VideoEmbed 
+          videoId="jKf8VqvLGqQ" 
+          title="Download Vimeo Videos with Browser Extension"
+          platform="youtube"
+        />
+      </div>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <VideoEmbed 
+          videoId="ZnoC6IZg4s4" 
+          title="How to Download Vimeo Videos for Free (Windows)"
+          platform="youtube"
+        />
+        <VideoEmbed 
+          videoId="MeLNJSwCnwk" 
+          title="How to Download Vimeo Videos for Free (Mac)"
+          platform="youtube"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="py-16">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-center mb-12">Why Choose Our {platform} Downloader?</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {features.map((feature) => (
+          <div class="bg-white p-6 rounded-lg shadow-md text-center">
+            <div class="text-primary-600 text-2xl mb-4">✓</div>
+            <p class="text-sm text-gray-700">{feature}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- How to Use Section -->
+  <section class="py-16 bg-gray-50">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-center mb-12">How to Use</h2>
+      <div class="space-y-6">
+        {instructions.map((instruction) => (
+          <div class="flex items-start gap-4 bg-white p-6 rounded-lg shadow-md">
+            <div class="bg-primary-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm">
+              {instruction.step}
+            </div>
+            <p class="text-gray-700 flex-1">{instruction.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="py-16">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-center mb-12">Frequently Asked Questions</h2>
+      <div class="space-y-6">
+        {faqs.map((faq) => (
+          <div class="bg-white p-6 rounded-lg shadow-md">
+            <h3 class="text-lg font-semibold text-gray-900 mb-2">{faq.question}</h3>
+            <p class="text-gray-700">{faq.answer}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Related Tools Section -->
+  {relatedTools && relatedTools.length > 0 && (
+    <section class="py-16 bg-gray-50">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold text-center mb-12">Related Tools</h2>
+        <div class="flex flex-wrap justify-center gap-4">
+          {relatedTools.map((tool) => (
+            <a 
+              href={`/tools/${tool.toLowerCase()}-downloader`}
+              class="bg-white px-6 py-3 rounded-lg shadow-md hover:shadow-lg transition-shadow text-gray-700 hover:text-primary-600"
+            >
+              {tool} Downloader
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- Blog Link Section -->
+  <section class="py-16">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <div class="bg-primary-50 rounded-lg p-8">
+        <h2 class="text-2xl font-bold text-gray-900 mb-4">
+          Need More Help?
+        </h2>
+        <p class="text-gray-700 mb-6">
+          Check out our comprehensive guide on downloading Vimeo videos with detailed instructions and tips.
+        </p>
+        <a 
+          href="/how-to-download-vimeo-videos" 
+          class="bg-primary-600 text-white px-6 py-3 rounded-lg hover:bg-primary-700 transition-colors inline-block"
+        >
+          Read Full Guide
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<script>
+  function downloadContent() {
+    const input = document.getElementById('url-input') as HTMLInputElement;
+    const url = input?.value;
+    
+    if (!url) {
+      alert('Please enter a valid URL');
+      return;
+    }
+    
+    // In a real implementation, this would call your backend API
+    console.log('Downloading:', url);
+    alert('Download functionality would be implemented here');
+  }
+</script>

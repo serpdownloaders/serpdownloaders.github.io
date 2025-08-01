@@ -325,10 +325,33 @@ const htmlContent = marked(markdownContent);
   featured={featured}
 >
   <VideoEmbed 
-    videoId="https://vimeo.com/148751763" 
-    title="How to Download Vimeo Videos - Guide"
-    platform="vimeo"
+    videoId="-_zu7XgFuKs" 
+    title="Download Any Vimeo Video Easily (on Public or Private Web Pages)"
+    platform="youtube"
   />
+  
+  <div class="my-8">
+    <h3 class="text-xl font-semibold text-gray-900 mb-4">More Vimeo Download Tutorials</h3>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <VideoEmbed 
+        videoId="jKf8VqvLGqQ" 
+        title="Download Vimeo Videos with Browser Extension"
+        platform="youtube"
+      />
+      <VideoEmbed 
+        videoId="ZnoC6IZg4s4" 
+        title="How to Download Vimeo Videos for Free (Windows)"
+        platform="youtube"
+      />
+    </div>
+    <div class="mt-4">
+      <VideoEmbed 
+        videoId="MeLNJSwCnwk" 
+        title="How to Download Vimeo Videos for Free (Mac)"
+        platform="youtube"
+      />
+    </div>
+  </div>
   
   <div set:html={htmlContent} class="prose max-w-none" />
 </BlogPost>
