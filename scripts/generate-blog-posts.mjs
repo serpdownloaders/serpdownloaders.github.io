@@ -23,10 +23,10 @@ const videos = videosContent.split('\n')
   })
   .filter(Boolean);
 
-// Parse the sitemap
+// Parse the sitemap for blog posts
 const lines = sitemapContent.split('\n').slice(1); // Skip header
-const tools = lines
-  .filter(line => line.startsWith('"tools"'))
+const blogPosts = lines
+  .filter(line => line.startsWith('"blog"'))
   .map(line => {
     const matches = line.match(/"([^"]+)","([^"]+)","([^"]+)"/);
     if (matches) {
@@ -38,8 +38,7 @@ const tools = lines
     }
     return null;
   })
-  .filter(Boolean)
-  .filter(tool => tool.url !== '/tools/'); // Remove the main tools page
+  .filter(Boolean);
 
 // Helper function to get relevant video for a platform
 function getRelevantVideo(platformName) {
@@ -53,13 +52,13 @@ function getRelevantVideo(platformName) {
 }
 
 // Helper function to generate blog post content
-function generateBlogPost(toolName, toolUrl) {
-  const platformName = toolName.replace(' Downloader', '').replace(' downloader', '');
-  const filename = `how-to-download-${platformName.toLowerCase().replace(/\s+/g, '-')}.mdx`;
+function generateBlogPost(postName, postUrl) {
+  const platformName = postName.replace(' Blog', '').replace(' blog', '');
+  const filename = `${platformName.toLowerCase().replace(/\s+/g, '-')}.mdx`;
   const relevantVideo = getRelevantVideo(platformName);
-  
-  const blogData = getBlogData(platformName, toolUrl, relevantVideo);
-  
+
+  const blogData = getBlogData(platformName, postUrl, relevantVideo);
+
   return {
     filename,
     content: `---
@@ -572,20 +571,21 @@ if (!fs.existsSync(postsDir)) {
 let generatedCount = 0;
 let skippedCount = 0;
 
-// Generate posts for first 20 tools to avoid overwhelming
-const toolsToProcess = tools.slice(0, 20);
-
 toolsToProcess.forEach(tool => {
-  const blogPost = generateBlogPost(tool.name, tool.url);
+// Generate posts for first 20 blog posts to avoid overwhelming
+const postsToProcess = blogPosts.slice(0, 20);
+
+postsToProcess.forEach(post => {
+  const blogPost = generateBlogPost(post.name, post.url);
   const filePath = path.join(postsDir, blogPost.filename);
-  
+
   // Skip if file already exists
   if (fs.existsSync(filePath)) {
     console.log(`⏭️  Skipped ${blogPost.filename} (already exists)`);
     skippedCount++;
     return;
   }
-  
+
   fs.writeFileSync(filePath, blogPost.content);
   console.log(`✅ Generated ${blogPost.filename}`);
   generatedCount++;
@@ -594,17 +594,17 @@ toolsToProcess.forEach(tool => {
 console.log(`\n📊 Blog Generation Summary:`);
 console.log(`Generated: ${generatedCount} new blog posts`);
 console.log(`Skipped: ${skippedCount} existing posts`);
-console.log(`Processed: ${toolsToProcess.length} tools`);
-console.log(`Total tools available: ${tools.length}`);
+console.log(`Processed: ${postsToProcess.length} blog posts`);
+console.log(`Total blog posts available: ${blogPosts.length}`);
 
 console.log(`\n📝 Generated blog posts for:`);
-toolsToProcess.slice(0, 10).forEach(tool => {
-  const platformName = tool.name.replace(' Downloader', '').replace(' downloader', '');
-  console.log(`   - How to Download ${platformName}`);
+postsToProcess.slice(0, 10).forEach(post => {
+  const platformName = post.name.replace(' Blog', '').replace(' blog', '');
+  console.log(`   - ${platformName}`);
 });
 
-if (toolsToProcess.length > 10) {
-  console.log(`   ... and ${toolsToProcess.length - 10} more`);
+if (postsToProcess.length > 10) {
+  console.log(`   ... and ${postsToProcess.length - 10} more`);
 }
 
 export default {};
