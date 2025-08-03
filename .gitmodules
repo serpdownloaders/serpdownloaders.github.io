@@ -1,6 +1,3 @@
 [submodule "src/serp-blocks"]
 	path = src/serp-blocks
 	url = https://github.com/serpcompany/serp-blocks
-[submodule "external/serp-blocks"]
-	path = external/serp-blocks
-	url = https://github.com/serpcompany/serp-blocks
