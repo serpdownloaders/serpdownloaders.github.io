@@ -1,27 +1,8 @@
 import fs from 'fs';
 import path from 'path';
 
-// Read the sitemap CSV
-const sitemapPath = './sitemap.csv';
-const sitemapContent = fs.readFileSync(sitemapPath, 'utf-8');
-
-// Parse the sitemap
-const lines = sitemapContent.split('\n').slice(1); // Skip header
-const tools = lines
-  .filter(line => line.startsWith('"tools"'))
-  .map(line => {
-    const matches = line.match(/"([^"]+)","([^"]+)","([^"]+)"/);
-    if (matches) {
-      return {
-        type: matches[1],
-        name: matches[2],
-        url: matches[3]
-      };
-    }
-    return null;
-  })
-  .filter(Boolean)
-  .filter(tool => tool.url !== '/tools/'); // Remove the main tools page
+// Sitemap logic removed. Use Astro's sitemap integration instead.
+// ...existing code...
 
 // Helper function to generate tool content
 function generateToolContent(toolName, toolUrl) {
