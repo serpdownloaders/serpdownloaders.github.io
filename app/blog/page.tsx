@@ -50,6 +50,15 @@ const blogPosts = [
     tags: ["Vimeo", "Private Videos", "Tutorial"]
   },
   {
+    slug: "how-to-download-facebook-videos",
+    title: "How to Download Facebook Videos and Photos - Complete Guide 2025",
+    description: "Download Facebook videos, photos, and stories easily. Learn the best methods to save Facebook content for offline viewing.",
+    date: "2024-12-01",
+    readTime: "10 min read",
+    category: "Social Media",
+    tags: ["Facebook", "Video Download", "Social Media", "Photos"]
+  },
+  {
     slug: "how-to-download-skool-videos",
     title: "Download Skool Course Videos for Offline Learning",
     description: "Step-by-step guide to downloading Skool course videos and community content for offline study.",

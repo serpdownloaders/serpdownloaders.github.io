@@ -36,7 +36,7 @@ const categories = [
   { id: "other", name: "Other Tools", count: 0 },
 ];
 
-// Define tools data
+// Define tools data - showing featured tools, many more available
 const tools = [
   {
     id: "youtube-downloader",
@@ -181,6 +181,85 @@ const tools = [
     color: "text-orange-600",
     bgColor: "bg-orange-50 dark:bg-orange-950/20"
   },
+  // Additional popular tools
+  {
+    id: "spotify-downloader",
+    name: "Spotify Playlist Exporter",
+    description: "Export Spotify playlist metadata and track information.",
+    category: "other",
+    icon: Music,
+    href: "/tools/spotify-downloader",
+    tags: ["spotify", "music", "playlist"],
+    isNew: true,
+    isPopular: true,
+    color: "text-green-600",
+    bgColor: "bg-green-50 dark:bg-green-950/20"
+  },
+  {
+    id: "soundcloud-downloader",
+    name: "SoundCloud Downloader",
+    description: "Download SoundCloud tracks, playlists, and podcasts.",
+    category: "other",
+    icon: Music,
+    href: "/tools/soundcloud-downloader",
+    tags: ["soundcloud", "music", "audio"],
+    isNew: false,
+    isPopular: true,
+    color: "text-orange-500",
+    bgColor: "bg-orange-50 dark:bg-orange-950/20"
+  },
+  {
+    id: "netflix-downloader",
+    name: "Netflix Downloader",
+    description: "Download Netflix shows and movies for offline viewing.",
+    category: "streaming",
+    icon: Tv,
+    href: "/tools/netflix-downloader",
+    tags: ["netflix", "streaming", "movies"],
+    isNew: true,
+    isPopular: true,
+    color: "text-red-600",
+    bgColor: "bg-red-50 dark:bg-red-950/20"
+  },
+  {
+    id: "reddit-downloader",
+    name: "Reddit Media Downloader",
+    description: "Download videos, GIFs, and images from Reddit posts.",
+    category: "social",
+    icon: Globe,
+    href: "/tools/reddit-downloader",
+    tags: ["reddit", "social", "media"],
+    isNew: false,
+    isPopular: true,
+    color: "text-orange-600",
+    bgColor: "bg-orange-50 dark:bg-orange-950/20"
+  },
+  {
+    id: "linkedin-learning-downloader",
+    name: "LinkedIn Learning Downloader",
+    description: "Download professional courses from LinkedIn Learning.",
+    category: "education",
+    icon: BookOpen,
+    href: "/tools/linkedin-learning-downloader",
+    tags: ["linkedin", "courses", "learning"],
+    isNew: true,
+    isPopular: false,
+    color: "text-blue-700",
+    bgColor: "bg-blue-50 dark:bg-blue-950/20"
+  },
+  {
+    id: "github-downloader",
+    name: "GitHub Repository Downloader",
+    description: "Download GitHub repos, releases, and individual files.",
+    category: "other",
+    icon: Globe,
+    href: "/tools/github-downloader",
+    tags: ["github", "code", "repository"],
+    isNew: false,
+    isPopular: false,
+    color: "text-gray-900 dark:text-gray-100",
+    bgColor: "bg-gray-50 dark:bg-gray-950/20"
+  },
 ];
 
 // Update category counts
@@ -219,8 +298,12 @@ export default function HomePage() {
                 SERP Downloaders
               </Badge>
               <h1 className="mb-4 text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
-                Download Anything
+                Download Content from
+                <span className="text-primary"> 80+ Platforms</span>
               </h1>
+              <p className="mb-8 text-lg text-muted-foreground">
+                Videos, images, documents, and more. Fast, free, and no software installation required.
+              </p>
 
               
               {/* Search Bar */}
@@ -364,9 +447,9 @@ export default function HomePage() {
                 <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">
                   <Globe className="h-8 w-8 text-primary" />
                 </div>
-                <h3 className="mb-2 text-xl font-semibold">50+ Platforms</h3>
+                <h3 className="mb-2 text-xl font-semibold">80+ Platforms</h3>
                 <p className="text-muted-foreground">
-                  Support for all major platforms and social media sites
+                  Support for video, audio, image, document, and educational platforms
                 </p>
               </div>
             </div>
