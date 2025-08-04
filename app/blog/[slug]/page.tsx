@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { marked } from "marked";
 
 // Blog post content - in a real app, this would be fetched based on the slug
 const blogPosts: Record<string, any> = {
@@ -527,6 +528,12 @@ export async function generateStaticParams() {
   }));
 }
 
+// Configure marked for better HTML output
+marked.setOptions({
+  breaks: true,
+  gfm: true
+});
+
 export default async function BlogPostPage({ params }: PageProps) {
   const { slug } = await params;
   const post = blogPosts[slug];
@@ -534,6 +541,11 @@ export default async function BlogPostPage({ params }: PageProps) {
   if (!post) {
     notFound();
   }
+
+  // Process content with marked if needed
+  const htmlContent = post.content.trim().startsWith('<') 
+    ? post.content 
+    : marked(post.content);
 
   return (
     <>
@@ -585,8 +597,21 @@ export default async function BlogPostPage({ params }: PageProps) {
 
             {/* Article Content */}
             <div 
-              className="prose prose-lg dark:prose-invert max-w-none mb-12"
-              dangerouslySetInnerHTML={{ __html: post.content }}
+              className="prose prose-lg dark:prose-invert max-w-none mb-12
+                prose-headings:font-bold prose-headings:tracking-tight
+                prose-h2:text-2xl prose-h2:mt-8 prose-h2:mb-4
+                prose-h3:text-xl prose-h3:mt-6 prose-h3:mb-3
+                prose-p:text-gray-700 dark:prose-p:text-gray-300
+                prose-a:text-primary prose-a:no-underline hover:prose-a:underline
+                prose-strong:text-gray-900 dark:prose-strong:text-gray-100
+                prose-ul:my-4 prose-ol:my-4
+                prose-li:my-1
+                prose-pre:bg-gray-100 dark:prose-pre:bg-gray-800
+                prose-code:text-sm prose-code:bg-gray-100 dark:prose-code:bg-gray-800 
+                prose-code:px-1 prose-code:py-0.5 prose-code:rounded
+                prose-blockquote:border-l-4 prose-blockquote:border-primary 
+                prose-blockquote:pl-4 prose-blockquote:italic"
+              dangerouslySetInnerHTML={{ __html: htmlContent }}
             />
 
             {/* Related Posts */}
