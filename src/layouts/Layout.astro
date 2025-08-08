@@ -1,4 +1,6 @@
 ---
+import { SITE } from '../config/site';
+
 export interface Props {
   title: string;
   description: string;
@@ -8,9 +10,8 @@ export interface Props {
 }
 
 const { title, description, keywords, canonical, ogImage } = Astro.props;
-const site = 'https://serpdownloaders.github.io';
-const canonicalURL = canonical || new URL(Astro.url.pathname, site).href;
-const ogImageURL = ogImage || `${site}/og-image.jpg`;
+const canonicalURL = canonical || new URL(Astro.url.pathname, SITE.url).href;
+const ogImageURL = ogImage || `${SITE.url}/og-image.jpg`;
 ---
 
 <!DOCTYPE html>
@@ -47,7 +48,7 @@ const ogImageURL = ogImage || `${site}/og-image.jpg`;
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:image" content={ogImageURL} />
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="SERP Downloaders" />
+    <meta property="og:site_name" content={SITE.name} />
     
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
@@ -96,12 +97,12 @@ const ogImageURL = ogImage || `${site}/og-image.jpg`;
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K94NDDB6"
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
-    <header class="bg-white shadow-sm border-b">
+    <header class="bg-white border-b">
       <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
           <div class="flex items-center">
             <a href="/" class="text-xl font-bold text-primary-700">
-              SERP Downloaders
+              {SITE.name}
             </a>
           </div>
           <div class="hidden md:flex items-center space-x-8">
@@ -122,8 +123,8 @@ const ogImageURL = ogImage || `${site}/og-image.jpg`;
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
-            <h3 class="text-lg font-semibold mb-4">SERP Downloaders</h3>
-            <p class="text-gray-400">Free online downloaders for videos, images, and content from popular platforms.</p>
+            <h3 class="text-lg font-semibold mb-4">{SITE.name}</h3>
+            <p class="text-gray-400">{SITE.description}</p>
           </div>
           <div>
             <h4 class="text-md font-semibold mb-4">Popular Tools</h4>
@@ -131,15 +132,15 @@ const ogImageURL = ogImage || `${site}/og-image.jpg`;
               <li><a href="/tools/youtube-downloader" class="hover:text-white transition-colors">YouTube Downloader</a></li>
               <li><a href="/tools/tiktok-downloader" class="hover:text-white transition-colors">TikTok Downloader</a></li>
               <li><a href="/tools/instagram-downloader" class="hover:text-white transition-colors">Instagram Downloader</a></li>
+              <li><a href="/tools/vimeo-video-downloader" class="hover:text-white transition-colors">Vimeo Downloader</a></li>
               <li><a href="/tools/pdf-downloader" class="hover:text-white transition-colors">PDF Downloader</a></li>
             </ul>
           </div>
           <div>
             <h4 class="text-md font-semibold mb-4">Learn</h4>
             <ul class="space-y-2 text-gray-400">
-              <li><a href="/blog" class="hover:text-white transition-colors">Blog</a></li>
-              <li><a href="/how-to-download-videos" class="hover:text-white transition-colors">How to Download Videos</a></li>
-              <li><a href="/how-to-download-pdfs" class="hover:text-white transition-colors">How to Download PDFs</a></li>
+              <li><a href="/blog" class="hover:text-white transition-colors">Blog & Guides</a></li>
+              <li><a href="/tools" class="hover:text-white transition-colors">All Tools</a></li>
             </ul>
           </div>
           <div>
@@ -154,7 +155,7 @@ const ogImageURL = ogImage || `${site}/og-image.jpg`;
         <div class="border-t border-gray-800 mt-8 pt-6">
           <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <div class="text-gray-400">
-              <p>&copy; 2025 SERP Downloaders. All rights reserved.</p>
+              <p>{SITE.footer.copyright}</p>
             </div>
             <div class="flex space-x-6 text-gray-400">
               <a href="https://github.com/serpapps" class="hover:text-white transition-colors" target="_blank" rel="noopener">GitHub</a>

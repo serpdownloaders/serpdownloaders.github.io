@@ -1,0 +1,79 @@
+{
+  "tools": {
+    "tiktok-downloader": {
+      "type": "browser",
+      "enabled": true,
+      "video": {
+        "url": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        "title": "How to Download TikTok Videos - Complete Tutorial",
+        "heading": "Watch How It Works"
+      }
+    },
+    "youtube-downloader": {
+      "type": "browser",
+      "enabled": true
+    },
+    "instagram-downloader": {
+      "type": "browser",
+      "enabled": true
+    },
+    "facebook-downloader": {
+      "type": "browser",
+      "enabled": true
+    },
+    "twitter-downloader": {
+      "type": "browser",
+      "enabled": true
+    },
+    "vimeo-video-downloader": {
+      "type": "external",
+      "enabled": true,
+      "externalUrl": "https://store.serp.co/vimeo-downloader-pro",
+      "video": {
+        "url": "https://www.youtube.com/embed/abc123",
+        "title": "Vimeo Downloader Pro Demo",
+        "heading": "See It In Action"
+      },
+      "features": [
+        "Download private Vimeo videos",
+        "Batch download entire showcases",
+        "4K quality support",
+        "No watermarks"
+      ]
+    },
+    "udemy-downloader": {
+      "type": "external",
+      "enabled": true,
+      "externalUrl": "https://store.serp.co/udemy-downloader-pro",
+      "features": [
+        "Download entire courses",
+        "Offline viewing",
+        "Subtitle support",
+        "Lifetime updates"
+      ]
+    },
+    "pdf-downloader": {
+      "type": "browser",
+      "enabled": true
+    },
+    "loom-video-downloader": {
+      "type": "browser",
+      "enabled": true
+    },
+    "skool-video-downloader": {
+      "type": "external",
+      "enabled": true,
+      "externalUrl": "https://store.serp.co/skool-downloader",
+      "features": [
+        "Download Skool community content",
+        "Course downloads",
+        "Private group access",
+        "Batch processing"
+      ]
+    }
+  },
+  "defaults": {
+    "type": "browser",
+    "enabled": true
+  }
+}
