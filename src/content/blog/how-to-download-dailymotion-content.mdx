@@ -1,14 +1,12 @@
 ---
-import BlogPost from '../../layouts/BlogPost.astro';
-import { marked } from 'marked';
+title: "How to Download Dailymotion Videos - Complete 2025 Guide"
+description: "Download Dailymotion videos easily and safely. Learn the best methods to save Dailymotion content for offline viewing and entertainment."
+publishDate: 2024-12-01
+tags: ["Dailymotion", "Video Download", "Entertainment", "Streaming"]
+featured: false
+category: "video"
+---
 
-const title = "How to Download Dailymotion Videos - Complete 2025 Guide";
-const description = "Download Dailymotion videos easily and safely. Learn the best methods to save Dailymotion content for offline viewing and entertainment.";
-const publishDate = "2024-12-01";
-const tags = ["Dailymotion", "Video Download", "Entertainment", "Streaming"];
-const featured = false;
-
-const markdownContent = `
 ## Why Download Dailymotion Videos?
 
 Dailymotion is a popular video hosting platform that features diverse content from creators worldwide. You might want to download Dailymotion videos for:
@@ -344,17 +342,3 @@ Downloading Dailymotion videos can provide convenient offline access to educatio
 Use our [Dailymotion Downloader tool](/tools/dailymotion-downloader) for reliable and high-quality downloads. Remember to organize your downloaded content effectively and support creators through legitimate channels.
 
 For more video downloading guides, check out our tutorials on [YouTube](/blog/how-to-download-youtube-content), [Vimeo](/tools/vimeo-downloader), and [other video platforms](/blog).
-`;
-
-const htmlContent = marked(markdownContent);
----
-
-<BlogPost 
-  title={title}
-  description={description}
-  publishDate={publishDate}
-  tags={tags}
-  featured={featured}
->
-  <div set:html={htmlContent} />
-</BlogPost>

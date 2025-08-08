@@ -1,15 +1,12 @@
 ---
-import BlogPost from '../../layouts/BlogPost.astro';
-import VideoEmbed from '../../components/VideoEmbed.astro';
-import { marked } from 'marked';
+title: "How to Download Instagram Videos and Photos - Complete 2025 Guide"
+description: "Download Instagram videos, photos, stories, and IGTV content easily. Learn the best methods and tools for Instagram content downloading."
+publishDate: 2024-12-01
+tags: ["Instagram", "Video Download", "Photo Download", "Social Media"]
+featured: true
+category: "image"
+---
 
-const title = "How to Download Instagram Videos and Photos - Complete 2025 Guide";
-const description = "Download Instagram videos, photos, stories, and IGTV content easily. Learn the best methods and tools for Instagram content downloading.";
-const publishDate = "2024-12-01";
-const tags = ["Instagram", "Video Download", "Photo Download", "Social Media"];
-const featured = true;
-
-const markdownContent = `
 ## Understanding Instagram Content Downloads
 
 Instagram is one of the world's most popular social media platforms, hosting billions of photos, videos, stories, and IGTV content. Whether you want to save your own content, create backups, or save content for offline viewing, knowing how to download Instagram media is increasingly valuable.
@@ -326,23 +323,3 @@ Whether you're backing up your own content, saving inspiration for creative proj
 For more social media downloading guides, check out our tutorials on [TikTok](/blog/how-to-download-tiktok-videos), [Twitter](/blog/how-to-download-twitter-content), and [Facebook](/blog/how-to-download-facebook-content).
 
 **Ready to start downloading Instagram content?** Try our [free Instagram downloader tool](/tools/instagram-downloader) now - no registration or Instagram login required!
-`;
-
-// Configure marked for better HTML output
-marked.setOptions({
-  breaks: true,
-  gfm: true
-});
-
-const htmlContent = marked(markdownContent);
----
-
-<BlogPost 
-  title={title}
-  description={description}
-  publishDate={publishDate}
-  tags={tags}
-  featured={featured}
->
-  <div set:html={htmlContent} class="prose max-w-none" />
-</BlogPost>

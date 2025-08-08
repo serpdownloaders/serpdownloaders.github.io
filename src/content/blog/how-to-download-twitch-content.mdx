@@ -1,14 +1,12 @@
 ---
-import BlogPost from '../../layouts/BlogPost.astro';
-import { marked } from 'marked';
+title: "How to Download Twitch Videos, Clips & VODs - Complete 2025 Guide"
+description: "Download Twitch streams, clips, and VODs easily. Learn the best methods to save Twitch content for offline viewing and archival purposes."
+publishDate: 2024-12-01
+tags: ["Twitch", "Stream Download", "Gaming", "Live Streaming"]
+featured: false
+category: "video"
+---
 
-const title = "How to Download Twitch Videos, Clips & VODs - Complete 2025 Guide";
-const description = "Download Twitch streams, clips, and VODs easily. Learn the best methods to save Twitch content for offline viewing and archival purposes.";
-const publishDate = "2024-12-01";
-const tags = ["Twitch", "Stream Download", "Gaming", "Live Streaming"];
-const featured = false;
-
-const markdownContent = `
 ## Why Download Twitch Content?
 
 Twitch is the world's leading live streaming platform for gaming, creative content, and "Just Chatting" streams. You might want to download Twitch content for:
@@ -373,17 +371,3 @@ Always respect copyright laws, Twitch's terms of service, and streamer rights wh
 For more streaming platform guides, check out our tutorials on [YouTube](/blog/how-to-download-youtube-content), [Facebook](/blog/how-to-download-facebook-content), and [other video platforms](/blog).
 
 **Ready to download Twitch content?** Try our [free Twitch downloader tool](/tools/twitch-downloader) now!
-`;
-
-const htmlContent = marked(markdownContent);
----
-
-<BlogPost 
-  title={title}
-  description={description}
-  publishDate={publishDate}
-  tags={tags}
-  featured={featured}
->
-  <div set:html={htmlContent} />
-</BlogPost>

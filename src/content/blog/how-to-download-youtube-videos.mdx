@@ -1,15 +1,12 @@
 ---
-import BlogPost from '../../layouts/BlogPost.astro';
-import VideoEmbed from '../../components/VideoEmbed.astro';
-import { marked } from 'marked';
+title: "How to Download YouTube Videos in High Quality - Complete 2025 Guide"
+description: "Download YouTube videos in HD, 4K, and various formats. Learn the best methods, tools, and practices for YouTube video downloading."
+publishDate: 2024-12-01
+tags: ["YouTube", "Video Download", "HD", "4K", "MP4"]
+featured: true
+category: "video"
+---
 
-const title = "How to Download YouTube Videos in High Quality - Complete 2025 Guide";
-const description = "Download YouTube videos in HD, 4K, and various formats. Learn the best methods, tools, and practices for YouTube video downloading.";
-const publishDate = "2024-12-01";
-const tags = ["YouTube", "Video Download", "HD", "4K", "MP4"];
-const featured = true;
-
-const markdownContent = `
 ## Why Download YouTube Videos?
 
 YouTube is the world's largest video platform, hosting millions of hours of content from educational tutorials to entertainment. While YouTube offers offline viewing through YouTube Premium, many users prefer to download videos for various reasons:
@@ -242,28 +239,3 @@ Remember to always respect copyright laws and YouTube's terms of service. Use do
 Whether you need a quick MP3 extraction or a full 4K video download, the right tools and knowledge will help you get exactly what you need from YouTube's vast content library.
 
 **Ready to start downloading?** Try our [free YouTube downloader](/tools/youtube-downloader) now - no registration or software installation required!
-`;
-
-// Configure marked for better HTML output
-marked.setOptions({
-  breaks: true,
-  gfm: true
-});
-
-const htmlContent = marked(markdownContent);
----
-
-<BlogPost 
-  title={title}
-  description={description}
-  publishDate={publishDate}
-  tags={tags}
-  featured={featured}
->
-  <VideoEmbed 
-    videoId="https://www.youtube.com/watch?v=dQw4w9WgXcQ" 
-    title="How to Download YouTube Videos - Tutorial"
-  />
-  
-  <div set:html={htmlContent} class="prose max-w-none" />
-</BlogPost>

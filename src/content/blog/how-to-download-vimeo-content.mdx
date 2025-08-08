@@ -1,14 +1,12 @@
 ---
-import BlogPost from '../../layouts/BlogPost.astro';
-import { marked } from 'marked';
+title: "How to Download Vimeo Videos - Complete 2025 Guide"
+description: "Download Vimeo videos in high quality. Learn the best methods to save Vimeo content for offline viewing and creative projects."
+publishDate: 2024-12-01
+tags: ["Vimeo", "Video Download", "Creative", "Professional"]
+featured: false
+category: "video"
+---
 
-const title = "How to Download Vimeo Videos - Complete 2025 Guide";
-const description = "Download Vimeo videos in high quality. Learn the best methods to save Vimeo content for offline viewing and creative projects.";
-const publishDate = "2024-12-01";
-const tags = ["Vimeo", "Video Download", "Creative", "Professional"];
-const featured = false;
-
-const markdownContent = `
 ## Why Download Vimeo Videos?
 
 Vimeo is a premium video hosting platform known for high-quality content and creative communities. You might want to download Vimeo videos for:
@@ -399,17 +397,3 @@ Downloading Vimeo videos provides access to high-quality creative and profession
 Use our [Vimeo Downloader tool](/tools/vimeo-downloader) for reliable, high-quality downloads that preserve the artistic integrity of Vimeo's premium content. For additional resources, check out this comprehensive [Vimeo video downloading guide](https://downloadanything.hashnode.dev/how-to-download-vimeo-videos) and explore our [advanced Vimeo downloader tools](https://downloaders.serp.co/vimeo-video-downloader). Remember to support creators through official channels and use downloaded content responsibly.
 
 For more video downloading guides, check out our tutorials on [YouTube](/blog/how-to-download-youtube-content), [Dailymotion](/blog/how-to-download-dailymotion-content), and [other video platforms](/blog).
-`;
-
-const htmlContent = marked(markdownContent);
----
-
-<BlogPost 
-  title={title}
-  description={description}
-  publishDate={publishDate}
-  tags={tags}
-  featured={featured}
->
-  <div set:html={htmlContent} />
-</BlogPost>

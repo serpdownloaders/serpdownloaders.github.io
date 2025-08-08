@@ -1,14 +1,12 @@
 ---
-import BlogPost from '../../layouts/BlogPost.astro';
-import { marked } from 'marked';
+title: "How to Download TikTok Videos Without Watermark - Complete 2025 Guide"
+description: "Download TikTok videos without watermarks using our free tools. Complete guide with step-by-step instructions and best practices for TikTok content."
+publishDate: 2024-12-01
+tags: ["TikTok", "Video Download", "No Watermark", "Social Media"]
+featured: true
+category: "video"
+---
 
-const title = "How to Download TikTok Videos Without Watermark - Complete 2025 Guide";
-const description = "Download TikTok videos without watermarks using our free tools. Complete guide with step-by-step instructions and best practices for TikTok content.";
-const publishDate = "2024-12-01";
-const tags = ["TikTok", "Video Download", "No Watermark", "Social Media"];
-const featured = true;
-
-const markdownContent = `
 ## Why Download TikTok Videos?
 
 TikTok has revolutionized short-form video content with over 1 billion active users creating and sharing engaging videos daily. You might want to download TikTok videos for:
@@ -355,17 +353,3 @@ Always respect creator rights, follow platform guidelines, and use downloaded co
 For more social media downloading guides, check out our tutorials on [Instagram](/blog/how-to-download-instagram-content), [Twitter](/blog/how-to-download-twitter-content), and [YouTube](/blog/how-to-download-youtube-content).
 
 **Ready to download TikTok videos without watermarks?** Try our [free TikTok downloader tool](/tools/tiktok-downloader) now!
-`;
-
-const htmlContent = marked(markdownContent);
----
-
-<BlogPost 
-  title={title}
-  description={description}
-  publishDate={publishDate}
-  tags={tags}
-  featured={featured}
->
-  <div set:html={htmlContent} />
-</BlogPost>

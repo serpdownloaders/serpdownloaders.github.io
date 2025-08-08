@@ -1,14 +1,12 @@
 ---
-import BlogPost from '../../layouts/BlogPost.astro';
-import { marked } from 'marked';
+title: "How to Download SoundCloud Music and Tracks - Complete 2025 Guide"
+description: "Download SoundCloud music, playlists, and audio tracks easily. Learn the best methods to save SoundCloud content for offline listening."
+publishDate: 2024-12-01
+tags: ["SoundCloud", "Music Download", "Audio", "Streaming"]
+featured: false
+category: "video"
+---
 
-const title = "How to Download SoundCloud Music and Tracks - Complete 2025 Guide";
-const description = "Download SoundCloud music, playlists, and audio tracks easily. Learn the best methods to save SoundCloud content for offline listening.";
-const publishDate = "2024-12-01";
-const tags = ["SoundCloud", "Music Download", "Audio", "Streaming"];
-const featured = false;
-
-const markdownContent = `
 ## Why Download SoundCloud Music?
 
 SoundCloud is one of the world's largest audio platforms, hosting millions of tracks from independent artists, podcasters, and musicians. You might want to download SoundCloud content for:
@@ -352,17 +350,3 @@ Downloading SoundCloud music opens up a world of independent artists, unique tra
 Use our [SoundCloud Downloader tool](/tools/soundcloud-downloader) for reliable and high-quality downloads. For additional audio tools and resources, visit our [complete downloader suite](https://downloaders.serp.co/) and explore our [comprehensive guides](https://downloadanything.hashnode.dev/). Remember to organize your music library effectively and discover new artists to support.
 
 For more audio downloading guides, check out our tutorials on [YouTube Music](/blog/how-to-download-youtube-content), [Spotify](/tools/spotify-downloader), and [other music platforms](/blog).
-`;
-
-const htmlContent = marked(markdownContent);
----
-
-<BlogPost 
-  title={title}
-  description={description}
-  publishDate={publishDate}
-  tags={tags}
-  featured={featured}
->
-  <div set:html={htmlContent} />
-</BlogPost>

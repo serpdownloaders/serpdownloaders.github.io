@@ -1,14 +1,12 @@
 ---
-import BlogPost from '../../layouts/BlogPost.astro';
-import { marked } from 'marked';
+title: "How to Download PDFs from Any Website - Complete 2025 Guide"
+description: "Complete guide to downloading PDF files from websites, research papers, documents, and online libraries. Free methods and tools included."
+publishDate: 2024-11-25
+tags: ["PDF", "Document Download", "Research", "Academic"]
+featured: false
+category: "document"
+---
 
-const title = "How to Download PDFs from Any Website - Complete 2025 Guide";
-const description = "Complete guide to downloading PDF files from websites, research papers, documents, and online libraries. Free methods and tools included.";
-const publishDate = "2024-11-25";
-const tags = ["PDF", "Document Download", "Research", "Academic"];
-const featured = false;
-
-const markdownContent = `
 ## Why Download PDF Files?
 
 PDF (Portable Document Format) files are essential for accessing research papers, ebooks, documentation, forms, and academic materials. You might want to download PDFs for:
@@ -359,17 +357,3 @@ Use our [PDF Downloader tool](/tools/pdf-downloader) for reliable and straightfo
 Remember to maintain proper file organization, respect intellectual property rights, and use appropriate tools for your specific PDF downloading needs.
 
 For more downloading guides, check out our tutorials on [academic content](/blog/category/educational-content), [research tools](/blog/category/document-downloads), and [other educational resources](/blog).
-`;
-
-const htmlContent = marked(markdownContent);
----
-
-<BlogPost 
-  title={title}
-  description={description}
-  publishDate={publishDate}
-  tags={tags}
-  featured={featured}
->
-  <div set:html={htmlContent} />
-</BlogPost>

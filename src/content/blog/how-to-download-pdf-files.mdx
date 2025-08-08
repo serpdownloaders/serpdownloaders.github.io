@@ -1,15 +1,12 @@
 ---
-import BlogPost from '../../layouts/BlogPost.astro';
-import VideoEmbed from '../../components/VideoEmbed.astro';
-import { marked } from 'marked';
+title: "How to Download PDF Files from Any Website - 2025 Complete Guide"
+description: "Learn how to download PDF files from websites, handle protected PDFs, and use various tools for PDF downloading and management."
+publishDate: 2024-12-01
+tags: ["PDF", "Download", "Document", "File Management"]
+featured: true
+category: "document"
+---
 
-const title = "How to Download PDF Files from Any Website - 2025 Complete Guide";
-const description = "Learn how to download PDF files from websites, handle protected PDFs, and use various tools for PDF downloading and management.";
-const publishDate = "2024-12-01";
-const tags = ["PDF", "Download", "Document", "File Management"];
-const featured = true;
-
-const markdownContent = `
 ## Understanding PDF Downloads
 
 PDF (Portable Document Format) files are one of the most common document formats on the web. Whether you're downloading research papers, manuals, reports, or e-books, knowing how to properly download and manage PDF files is essential for both personal and professional use.
@@ -291,31 +288,3 @@ Remember to always respect copyright laws and website terms of service when down
 For complex download scenarios or when simple browser downloads don't work, our [PDF Downloader tool](/tools/pdf-downloader) provides a reliable alternative that can handle various types of PDF links and sources.
 
 **Ready to start downloading PDFs more effectively?** Try our [free PDF downloader tool](/tools/pdf-downloader) now!
-`;
-
-// Configure marked for better HTML output
-marked.setOptions({
-  breaks: true,
-  gfm: true
-});
-
-const htmlContent = marked(markdownContent);
----
-
-<BlogPost 
-  title={title}
-  description={description}
-  publishDate={publishDate}
-  tags={tags}
-  featured={featured}
->
-  <div class="my-8">
-    <VideoEmbed 
-      videoId="buF1BelQ1pA" 
-      title="How to Download Free Books, PDFs | Download Any Book for Free"
-      platform="youtube"
-    />
-  </div>
-
-  <div set:html={htmlContent} class="prose max-w-none" />
-</BlogPost>

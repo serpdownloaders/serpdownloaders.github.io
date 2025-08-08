@@ -1,0 +1,38 @@
+---
+import { getCollection } from 'astro:content';
+import BlogPost from '../../layouts/BlogPost.astro';
+
+export async function getStaticPaths() {
+  const blogPosts = await getCollection('blog');
+  
+  return blogPosts.map(post => ({
+    params: { slug: post.slug },
+    props: { post }
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+
+// Map category to proper category slug
+const getCategorySlug = (category: string | undefined) => {
+  switch(category) {
+    case 'video': return 'video-downloads';
+    case 'document': return 'document-downloads';
+    case 'image': return 'image-downloads';
+    case 'educational': return 'educational-content';
+    default: return 'video-downloads';
+  }
+};
+---
+
+<BlogPost 
+  title={post.data.title}
+  description={post.data.description}
+  publishDate={post.data.publishDate.toISOString()}
+  tags={post.data.tags}
+  featured={post.data.featured}
+  category={getCategorySlug(post.data.category)}
+>
+  <Content />
+</BlogPost>

@@ -1,14 +1,12 @@
 ---
-import BlogPost from '../../layouts/BlogPost.astro';
-import { marked } from 'marked';
+title: "How to Download YouTube Videos in HD Quality - Complete 2025 Guide"
+description: "Download YouTube videos in high definition with our comprehensive guide. Free tools, methods, and best practices for YouTube video downloading."
+publishDate: 2024-12-01
+tags: ["YouTube", "Video Download", "HD Videos", "Streaming"]
+featured: true
+category: "video"
+---
 
-const title = "How to Download YouTube Videos in HD Quality - Complete 2025 Guide";
-const description = "Download YouTube videos in high definition with our comprehensive guide. Free tools, methods, and best practices for YouTube video downloading.";
-const publishDate = "2024-12-01";
-const tags = ["YouTube", "Video Download", "HD Videos", "Streaming"];
-const featured = true;
-
-const markdownContent = `
 ## Why Download YouTube Videos?
 
 YouTube is the world's largest video platform with over 2 billion logged-in monthly users and countless hours of content uploaded daily. You might want to download YouTube videos for:
@@ -387,17 +385,3 @@ Always respect copyright laws, YouTube's terms of service, and creator rights wh
 For more video downloading guides, check out our tutorials on [TikTok](/blog/how-to-download-tiktok-content), [Instagram](/blog/how-to-download-instagram-content), and [Vimeo](/blog/how-to-download-vimeo-content).
 
 **Ready to download YouTube videos in HD quality?** Try our [free YouTube downloader tool](/tools/youtube-downloader) now!
-`;
-
-const htmlContent = marked(markdownContent);
----
-
-<BlogPost 
-  title={title}
-  description={description}
-  publishDate={publishDate}
-  tags={tags}
-  featured={featured}
->
-  <div set:html={htmlContent} />
-</BlogPost>

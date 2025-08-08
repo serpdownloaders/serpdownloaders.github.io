@@ -1,14 +1,12 @@
 ---
-import BlogPost from '../../layouts/BlogPost.astro';
-import { marked } from 'marked';
+title: "How to Download Snapchat Videos and Stories - Complete 2025 Guide"
+description: "Download Snapchat videos, stories, and memories easily. Learn the best methods to save Snapchat content for offline viewing and archival."
+publishDate: 2024-12-01
+tags: ["Snapchat", "Video Download", "Stories", "Social Media"]
+featured: false
+category: "video"
+---
 
-const title = "How to Download Snapchat Videos and Stories - Complete 2025 Guide";
-const description = "Download Snapchat videos, stories, and memories easily. Learn the best methods to save Snapchat content for offline viewing and archival.";
-const publishDate = "2024-12-01";
-const tags = ["Snapchat", "Video Download", "Stories", "Social Media"];
-const featured = false;
-
-const markdownContent = `
 ## Why Download Snapchat Content?
 
 Snapchat is known for its ephemeral content that disappears after viewing, making it challenging but valuable to preserve special moments. You might want to download Snapchat content for:
@@ -359,17 +357,3 @@ Remember to use content preservation responsibly, respect others' privacy, and s
 For more social media downloading guides, check out our tutorials on [Instagram](/blog/how-to-download-instagram-content), [TikTok](/blog/how-to-download-tiktok-content), and [other social platforms](/blog).
 
 **Ready to preserve your Snapchat memories?** Try our [Snapchat downloader tool](/tools/snapchat-downloader) for public content and use built-in features for your personal memories!
-`;
-
-const htmlContent = marked(markdownContent);
----
-
-<BlogPost 
-  title={title}
-  description={description}
-  publishDate={publishDate}
-  tags={tags}
-  featured={featured}
->
-  <div set:html={htmlContent} />
-</BlogPost>

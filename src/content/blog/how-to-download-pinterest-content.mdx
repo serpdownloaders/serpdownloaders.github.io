@@ -1,14 +1,12 @@
 ---
-import BlogPost from '../../layouts/BlogPost.astro';
-import { marked } from 'marked';
+title: "How to Download Pinterest Images and Videos - Complete 2025 Guide"
+description: "Download Pinterest images, videos, and pins easily. Learn the best methods to save Pinterest content for offline viewing and inspiration boards."
+publishDate: 2024-12-01
+tags: ["Pinterest", "Image Download", "Inspiration", "Design"]
+featured: false
+category: "image"
+---
 
-const title = "How to Download Pinterest Images and Videos - Complete 2025 Guide";
-const description = "Download Pinterest images, videos, and pins easily. Learn the best methods to save Pinterest content for offline viewing and inspiration boards.";
-const publishDate = "2024-12-01";
-const tags = ["Pinterest", "Image Download", "Inspiration", "Design"];
-const featured = false;
-
-const markdownContent = `
 ## Why Download Pinterest Content?
 
 Pinterest is a visual discovery platform where millions of users share and curate inspiring images, videos, and ideas. You might want to download Pinterest content for:
@@ -307,17 +305,3 @@ Downloading Pinterest images and videos can greatly enhance your creative projec
 Use our [Pinterest Downloader tool](/tools/pinterest-downloader) for easy and reliable access to Pinterest content. For more downloading tools and resources, explore our [comprehensive tool collection](https://downloaders.serp.co/) and check out our [educational blog](https://downloadanything.hashnode.dev/) for additional guides. Remember to organize your downloads effectively and use them responsibly for personal or educational purposes.
 
 For more downloading guides, check out our tutorials on [Instagram](/blog/how-to-download-instagram-content), [Facebook](/blog/how-to-download-facebook-content), and [other social platforms](/blog).
-`;
-
-const htmlContent = marked(markdownContent);
----
-
-<BlogPost 
-  title={title}
-  description={description}
-  publishDate={publishDate}
-  tags={tags}
-  featured={featured}
->
-  <div set:html={htmlContent} />
-</BlogPost>

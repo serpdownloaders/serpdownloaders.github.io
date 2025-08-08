@@ -1,14 +1,12 @@
 ---
-import BlogPost from '../../layouts/BlogPost.astro';
-import { marked } from 'marked';
+title: "How to Download Loom Videos - Complete 2025 Guide"
+description: "Download Loom videos easily and safely. Learn the best methods to save Loom recordings for offline viewing and sharing."
+publishDate: 2024-12-01
+tags: ["Loom", "Video Download", "Screen Recording", "Business"]
+featured: false
+category: "video"
+---
 
-const title = "How to Download Loom Videos - Complete 2025 Guide";
-const description = "Download Loom videos easily and safely. Learn the best methods to save Loom recordings for offline viewing and sharing.";
-const publishDate = "2024-12-01";
-const tags = ["Loom", "Video Download", "Screen Recording", "Business"];
-const featured = false;
-
-const markdownContent = `
 ## Why Download Loom Videos?
 
 Loom is a popular screen recording and video messaging platform used by millions for business communication, education, and content creation. You might want to download Loom videos for:
@@ -327,17 +325,3 @@ Use our [Loom Downloader tool](/tools/loom-downloader) for reliable downloads, o
 Remember to organize your downloaded content effectively, maintain proper permissions, and use downloads responsibly for personal, educational, or business purposes.
 
 For more video downloading guides, check out our tutorials on [Vimeo](/blog/how-to-download-vimeo-content), [YouTube](/blog/how-to-download-youtube-content), and [other video platforms](/blog).
-`;
-
-const htmlContent = marked(markdownContent);
----
-
-<BlogPost 
-  title={title}
-  description={description}
-  publishDate={publishDate}
-  tags={tags}
-  featured={featured}
->
-  <div set:html={htmlContent} />
-</BlogPost>

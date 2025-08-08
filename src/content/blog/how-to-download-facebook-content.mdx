@@ -1,14 +1,12 @@
 ---
-import BlogPost from '../../layouts/BlogPost.astro';
-import { marked } from 'marked';
+title: "How to Download Facebook Videos and Photos - Complete Guide 2025"
+description: "Download Facebook videos, photos, and stories easily. Learn the best methods to save Facebook content for offline viewing with step-by-step instructions."
+publishDate: 2024-12-01
+tags: ["Facebook", "Video Download", "Social Media", "Photos"]
+featured: false
+category: "image"
+---
 
-const title = "How to Download Facebook Videos and Photos - Complete Guide 2025";
-const description = "Download Facebook videos, photos, and stories easily. Learn the best methods to save Facebook content for offline viewing with step-by-step instructions.";
-const publishDate = "2024-12-01";
-const tags = ["Facebook", "Video Download", "Social Media", "Photos"];
-const featured = false;
-
-const markdownContent = `
 ## Why Download Facebook Content?
 
 Facebook remains one of the world's largest social media platforms, hosting billions of videos, photos, and other media content daily. Users often want to download Facebook content for:
@@ -264,17 +262,3 @@ Downloading Facebook videos and photos can help you preserve important memories 
 Our [Facebook Downloader tool](/tools/facebook-downloader) provides an easy and reliable way to save Facebook videos. Use it responsibly and always respect the rights of content creators and privacy of individuals.
 
 For more social media downloading guides, explore our tutorials on [Instagram](/blog/how-to-download-instagram-content), [Twitter](/blog/how-to-download-twitter-content), and [TikTok](/blog/how-to-download-tiktok-videos).
-`;
-
-const htmlContent = marked(markdownContent);
----
-
-<BlogPost 
-  title={title}
-  description={description}
-  publishDate={publishDate}
-  tags={tags}
-  featured={featured}
->
-  <div set:html={htmlContent} />
-</BlogPost>

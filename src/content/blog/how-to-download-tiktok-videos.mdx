@@ -1,15 +1,12 @@
 ---
-import BlogPost from '../../layouts/BlogPost.astro';
-import VideoEmbed from '../../components/VideoEmbed.astro';
-import { marked } from 'marked';
+title: "How to Download TikTok Videos Without Watermark - 2025 Guide"
+description: "Download TikTok videos without watermarks using our free tools. Complete guide with step-by-step instructions and best practices."
+publishDate: 2024-12-01
+tags: ["TikTok", "Video Download", "No Watermark", "Social Media"]
+featured: true
+category: "video"
+---
 
-const title = "How to Download TikTok Videos Without Watermark - 2025 Guide";
-const description = "Download TikTok videos without watermarks using our free tools. Complete guide with step-by-step instructions and best practices.";
-const publishDate = "2024-12-01";
-const tags = ["TikTok", "Video Download", "No Watermark", "Social Media"];
-const featured = true;
-
-const markdownContent = `
 ## Why Download TikTok Videos?
 
 TikTok has become one of the most popular social media platforms, with millions of users creating and sharing short-form videos daily. Whether you want to save your favorite videos for offline viewing, create compilations, or repurpose content for other platforms, downloading TikTok videos can be incredibly useful.
@@ -129,23 +126,3 @@ Downloading TikTok videos without watermarks is straightforward with the right t
 Remember to always respect creators' rights and use downloaded content responsibly. Whether you're saving videos for personal enjoyment, educational purposes, or content creation, these methods will help you get clean, watermark-free TikTok videos quickly and easily.
 
 **Ready to start downloading?** Try our [free TikTok downloader tool](/tools/tiktok-downloader) now - no registration required!
-`;
-
-// Configure marked for better HTML output
-marked.setOptions({
-  breaks: true,
-  gfm: true
-});
-
-const htmlContent = marked(markdownContent);
----
-
-<BlogPost 
-  title={title}
-  description={description}
-  publishDate={publishDate}
-  tags={tags}
-  featured={featured}
->
-  <div set:html={htmlContent} class="prose max-w-none" />
-</BlogPost>

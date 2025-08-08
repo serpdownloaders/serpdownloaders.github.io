@@ -1,14 +1,12 @@
 ---
-import BlogPost from '../../layouts/BlogPost.astro';
-import { marked } from 'marked';
+title: "How to Download Skool Videos and Content - Complete 2025 Guide"
+description: "Download Skool videos, courses, and community content easily. Learn the best methods to save Skool educational content for offline learning."
+publishDate: 2024-12-01
+tags: ["Skool", "Video Download", "Education", "Online Learning"]
+featured: false
+category: "educational"
+---
 
-const title = "How to Download Skool Videos and Content - Complete 2025 Guide";
-const description = "Download Skool videos, courses, and community content easily. Learn the best methods to save Skool educational content for offline learning.";
-const publishDate = "2024-12-01";
-const tags = ["Skool", "Video Download", "Education", "Online Learning"];
-const featured = false;
-
-const markdownContent = `
 ## Why Download Skool Content?
 
 Skool is a modern community platform that combines courses, discussions, and video content for online education and community building. You might want to download Skool content for:
@@ -329,17 +327,3 @@ Use our [Skool Downloader tool](/tools/skool-downloader) for reliable downloads,
 Remember to organize your educational downloads effectively, maintain proper study habits, and use downloaded content responsibly for learning and academic purposes.
 
 For more educational content downloading guides, check out our tutorials on [Udemy](/tools/udemy-downloader), [YouTube](/blog/how-to-download-youtube-content), and explore our [GitHub resources for course downloading](https://github.com/serpapps/udemy-downloader).
-`;
-
-const htmlContent = marked(markdownContent);
----
-
-<BlogPost 
-  title={title}
-  description={description}
-  publishDate={publishDate}
-  tags={tags}
-  featured={featured}
->
-  <div set:html={htmlContent} />
-</BlogPost>
