@@ -24,42 +24,116 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # Setup Ruby with conditional bundler cache
-      - name: Setup Ruby
+      # Detect project type
+      - name: Detect project type
         if: github.event.action != 'closed'
+        id: detect
+        run: |
+          if [ -f "package.json" ]; then
+            echo "Project appears to be Node.js based (Next.js/React/etc)"
+            echo "type=node" >> $GITHUB_OUTPUT
+          elif [ -f "Gemfile" ] || [ -f "_config.yml" ]; then
+            echo "Project appears to be Jekyll based"
+            echo "type=jekyll" >> $GITHUB_OUTPUT
+          else
+            echo "Project type unclear, checking main branch..."
+            
+            # Fetch main branch to check
+            git fetch origin main --depth=1
+            
+            if git show origin/main:package.json > /dev/null 2>&1; then
+              echo "Main branch has package.json - Node.js project"
+              echo "type=node" >> $GITHUB_OUTPUT
+              # Get package files from main if not in PR
+              if [ ! -f "package.json" ]; then
+                git show origin/main:package.json > package.json
+                git show origin/main:package-lock.json > package-lock.json 2>/dev/null || true
+              fi
+            elif git show origin/main:Gemfile > /dev/null 2>&1; then
+              echo "Main branch has Gemfile - Jekyll project"
+              echo "type=jekyll" >> $GITHUB_OUTPUT
+              # Get Gemfile from main if not in PR
+              if [ ! -f "Gemfile" ]; then
+                git show origin/main:Gemfile > Gemfile
+                git show origin/main:Gemfile.lock > Gemfile.lock 2>/dev/null || true
+              fi
+            else
+              echo "Could not determine project type"
+              echo "type=unknown" >> $GITHUB_OUTPUT
+            fi
+          fi
+
+      # Setup Node.js for Next.js/React projects
+      - name: Setup Node.js
+        if: github.event.action != 'closed' && steps.detect.outputs.type == 'node'
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      # Setup Ruby for Jekyll projects  
+      - name: Setup Ruby
+        if: github.event.action != 'closed' && steps.detect.outputs.type == 'jekyll'
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.2'
-          bundler-cache: false  # Disable auto cache, we'll handle it manually
 
-      # Check if Gemfile exists and install dependencies accordingly
-      - name: Install dependencies
-        if: github.event.action != 'closed'
+      # Build for Node.js projects
+      - name: Build Node.js project
+        if: github.event.action != 'closed' && steps.detect.outputs.type == 'node'
         run: |
-          # First check if we need to get Gemfile from main branch
-          if [ ! -f "Gemfile" ]; then
-            echo "No Gemfile in PR branch, fetching from main branch..."
-            git fetch origin main
-            git checkout origin/main -- Gemfile Gemfile.lock 2>/dev/null || true
-          fi
+          npm ci || npm install
           
-          # Now install dependencies
-          if [ -f "Gemfile" ]; then
-            echo "Installing from Gemfile..."
-            gem install bundler
-            bundle install
+          # For Next.js, we need to export static files
+          if grep -q "next" package.json; then
+            # Set base path for Next.js
+            export NEXT_PUBLIC_BASE_PATH="/pr-preview/pr-${{ github.event.pull_request.number }}"
+            
+            # Try to build and export
+            npm run build || npx next build
+            npx next export -o _site || npm run export || echo "Export not configured"
+            
+            # If no export, check for out directory from build
+            if [ ! -d "_site" ] && [ -d "out" ]; then
+              mv out _site
+            elif [ ! -d "_site" ] && [ -d ".next" ]; then
+              echo "Next.js app needs static export configuration"
+              mkdir -p _site
+              echo "<html><body>This Next.js app needs static export configuration</body></html>" > _site/index.html
+            fi
           else
-            echo "ERROR: No Gemfile found even after trying to fetch from main"
-            exit 1
+            # Regular Node.js build
+            npm run build || echo "No build script"
+            
+            # Find output directory
+            if [ -d "dist" ]; then
+              mv dist _site
+            elif [ -d "build" ]; then
+              mv build _site  
+            elif [ -d "public" ]; then
+              mv public _site
+            else
+              mkdir -p _site
+              cp -r . _site/ 2>/dev/null || true
+            fi
           fi
 
-      # Build the Jekyll site (only if not closing the PR)
-      - name: Build with Jekyll
-        if: github.event.action != 'closed'
+      # Build for Jekyll projects
+      - name: Build Jekyll project
+        if: github.event.action != 'closed' && steps.detect.outputs.type == 'jekyll'
         run: |
+          gem install bundler
+          bundle install
           bundle exec jekyll build --baseurl "/pr-preview/pr-${{ github.event.pull_request.number }}"
         env:
           JEKYLL_ENV: production
+
+      # Handle unknown project types
+      - name: Handle static files
+        if: github.event.action != 'closed' && steps.detect.outputs.type == 'unknown'
+        run: |
+          echo "Could not determine project type, assuming static files"
+          mkdir -p _site
+          cp -r . _site/ 2>/dev/null || true
 
       # Deploy the preview to GitHub Pages
       - name: Deploy preview
@@ -83,7 +157,8 @@ jobs:
         with:
           script: |
             const url = '${{ steps.preview-url.outputs.url }}';
-            const body = `### 🚀 Deploy Preview ready!\n\n🔗 **Preview URL:** ${url}\n\n*This preview will be automatically updated when you push new commits to this PR.*`;
+            const projectType = '${{ steps.detect.outputs.type }}';
+            const body = `### 🚀 Deploy Preview ready!\n\n🔗 **Preview URL:** ${url}\n📦 **Detected Project Type:** ${projectType}\n\n*This preview will be automatically updated when you push new commits to this PR.*`;
             
             // Find and update existing comment or create new one
             const { data: comments } = await github.rest.issues.listComments({
