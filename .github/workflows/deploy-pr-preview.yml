@@ -24,122 +24,48 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # Detect project type
-      - name: Detect project type
-        if: github.event.action != 'closed'
-        id: detect
-        run: |
-          if [ -f "package.json" ]; then
-            echo "Project appears to be Node.js based (Next.js/React/etc)"
-            echo "type=node" >> $GITHUB_OUTPUT
-          elif [ -f "Gemfile" ] || [ -f "_config.yml" ]; then
-            echo "Project appears to be Jekyll based"
-            echo "type=jekyll" >> $GITHUB_OUTPUT
-          else
-            echo "Project type unclear, checking main branch..."
-            
-            # Fetch main branch to check
-            git fetch origin main --depth=1
-            
-            if git show origin/main:package.json > /dev/null 2>&1; then
-              echo "Main branch has package.json - Node.js project"
-              echo "type=node" >> $GITHUB_OUTPUT
-              # Get package files from main if not in PR
-              if [ ! -f "package.json" ]; then
-                git show origin/main:package.json > package.json
-                git show origin/main:package-lock.json > package-lock.json 2>/dev/null || true
-              fi
-            elif git show origin/main:Gemfile > /dev/null 2>&1; then
-              echo "Main branch has Gemfile - Jekyll project"
-              echo "type=jekyll" >> $GITHUB_OUTPUT
-              # Get Gemfile from main if not in PR
-              if [ ! -f "Gemfile" ]; then
-                git show origin/main:Gemfile > Gemfile
-                git show origin/main:Gemfile.lock > Gemfile.lock 2>/dev/null || true
-              fi
-            else
-              echo "Could not determine project type"
-              echo "type=unknown" >> $GITHUB_OUTPUT
-            fi
-          fi
-
-      # Setup Node.js for Next.js/React projects
+      # Setup Node.js for Astro
       - name: Setup Node.js
-        if: github.event.action != 'closed' && steps.detect.outputs.type == 'node'
+        if: github.event.action != 'closed'
         uses: actions/setup-node@v4
         with:
           node-version: '20'
 
-      # Setup Ruby for Jekyll projects  
-      - name: Setup Ruby
-        if: github.event.action != 'closed' && steps.detect.outputs.type == 'jekyll'
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: '3.2'
-
-      # Build for Node.js projects
-      - name: Build Node.js project
-        if: github.event.action != 'closed' && steps.detect.outputs.type == 'node'
+      # Get package.json and package-lock.json from main if not in PR branch
+      - name: Get package files from main if missing
+        if: github.event.action != 'closed'
         run: |
-          npm ci || npm install
-          
-          # For Next.js, we need to export static files
-          if grep -q "next" package.json; then
-            # Set base path for Next.js
-            export NEXT_PUBLIC_BASE_PATH="/pr-preview/pr-${{ github.event.pull_request.number }}"
+          if [ ! -f "package.json" ]; then
+            echo "No package.json in PR branch, fetching from main branch..."
+            git fetch origin main --depth=1
+            git show origin/main:package.json > package.json
+            git show origin/main:package-lock.json > package-lock.json 2>/dev/null || echo "No package-lock.json"
             
-            # Try to build and export
-            npm run build || npx next build
-            npx next export -o _site || npm run export || echo "Export not configured"
-            
-            # If no export, check for out directory from build
-            if [ ! -d "_site" ] && [ -d "out" ]; then
-              mv out _site
-            elif [ ! -d "_site" ] && [ -d ".next" ]; then
-              echo "Next.js app needs static export configuration"
-              mkdir -p _site
-              echo "<html><body>This Next.js app needs static export configuration</body></html>" > _site/index.html
-            fi
-          else
-            # Regular Node.js build
-            npm run build || echo "No build script"
-            
-            # Find output directory
-            if [ -d "dist" ]; then
-              mv dist _site
-            elif [ -d "build" ]; then
-              mv build _site  
-            elif [ -d "public" ]; then
-              mv public _site
-            else
-              mkdir -p _site
-              cp -r . _site/ 2>/dev/null || true
+            # Also get astro.config if missing
+            if [ ! -f "astro.config.mjs" ]; then
+              git show origin/main:astro.config.mjs > astro.config.mjs 2>/dev/null || echo "No astro.config.mjs"
             fi
           fi
 
-      # Build for Jekyll projects
-      - name: Build Jekyll project
-        if: github.event.action != 'closed' && steps.detect.outputs.type == 'jekyll'
-        run: |
-          gem install bundler
-          bundle install
-          bundle exec jekyll build --baseurl "/pr-preview/pr-${{ github.event.pull_request.number }}"
-        env:
-          JEKYLL_ENV: production
+      # Install dependencies
+      - name: Install dependencies
+        if: github.event.action != 'closed'
+        run: npm ci || npm install
 
-      # Handle unknown project types
-      - name: Handle static files
-        if: github.event.action != 'closed' && steps.detect.outputs.type == 'unknown'
+      # Build Astro site with base path for PR preview
+      - name: Build Astro site
+        if: github.event.action != 'closed'
         run: |
-          echo "Could not determine project type, assuming static files"
-          mkdir -p _site
-          cp -r . _site/ 2>/dev/null || true
+          # Build with the PR preview base path
+          npm run build -- --base "/pr-preview/pr-${{ github.event.pull_request.number }}"
+        env:
+          PUBLIC_BASE_URL: "/pr-preview/pr-${{ github.event.pull_request.number }}"
 
       # Deploy the preview to GitHub Pages
       - name: Deploy preview
         uses: rossjrw/pr-preview-action@v1
         with:
-          source-dir: ./_site
+          source-dir: ./dist
           preview-branch: gh-pages
           umbrella-dir: pr-preview
           action: auto
@@ -157,8 +83,7 @@ jobs:
         with:
           script: |
             const url = '${{ steps.preview-url.outputs.url }}';
-            const projectType = '${{ steps.detect.outputs.type }}';
-            const body = `### 🚀 Deploy Preview ready!\n\n🔗 **Preview URL:** ${url}\n📦 **Detected Project Type:** ${projectType}\n\n*This preview will be automatically updated when you push new commits to this PR.*`;
+            const body = `### 🚀 Deploy Preview ready!\n\n🔗 **Preview URL:** ${url}\n\n*This preview will be automatically updated when you push new commits to this PR.*`;
             
             // Find and update existing comment or create new one
             const { data: comments } = await github.rest.issues.listComments({
