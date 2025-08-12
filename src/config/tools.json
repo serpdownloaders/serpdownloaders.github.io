@@ -28,12 +28,22 @@
     "vimeo-video-downloader": {
       "type": "external",
       "enabled": true,
-      "externalUrl": "https://store.serp.co/vimeo-downloader-pro",
+      "externalUrl": "https://serp.ly/vimeo-video-downloader",
       "video": {
-        "url": "https://www.youtube.com/embed/abc123",
-        "title": "Vimeo Downloader Pro Demo",
+        "url": "https://www.youtube.com/watch?v=-_zu7XgFuKs",
+        "title": "Vimeo Video Downloader",
         "heading": "See It In Action"
       },
+      "videos": [
+        {
+          "url": "https://www.youtube.com/embed/-_zu7XgFuKs",
+          "title": "How to Download Vimeo Videos - Complete Guide"
+        },
+        {
+          "url": "https://www.youtube.com/embed/jKf8VqvLGqQ",
+          "title": "Vimeo Downloader Tips and Tricks"
+        }
+      ],
       "features": [
         "Download private Vimeo videos",
         "Batch download entire showcases",
@@ -44,7 +54,7 @@
     "udemy-downloader": {
       "type": "external",
       "enabled": true,
-      "externalUrl": "https://store.serp.co/udemy-downloader-pro",
+      "externalUrl": "https://serp.ly/udemy-video-downloader",
       "features": [
         "Download entire courses",
         "Offline viewing",
@@ -63,12 +73,22 @@
     "skool-video-downloader": {
       "type": "external",
       "enabled": true,
-      "externalUrl": "https://store.serp.co/skool-downloader",
+      "externalUrl": "https://serp.ly/skool-video-downloader",
       "features": [
         "Download Skool community content",
         "Course downloads",
         "Private group access",
         "Batch processing"
+      ],
+      "videos": [
+        {
+          "url": "https://www.youtube.com/embed/YBBSkdb1YAw",
+          "title": "How to Download Skool Videos - Tutorial 1"
+        },
+        {
+          "url": "https://www.youtube.com/embed/Ez7vpisxEdY", 
+          "title": "Skool Downloader Advanced Features - Tutorial 2"
+        }
       ]
     }
   },

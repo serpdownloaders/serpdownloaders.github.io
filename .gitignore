@@ -5,3 +5,16 @@ node_modules
 .env
 .DS_Store
 .claude/*
+
+# Build output
+dist/
+.astro/
+
+# Coders in Flow
+.venv
+.codex
+out
+dist
+*.vsix
+.claude
+CLAUDE.md

@@ -182,6 +182,34 @@ const keywords = `${platform.toLowerCase()} downloader, download ${platform.toLo
     </section>
   )}
 
+  <!-- Videos Section -->
+  {toolConfig.videos && toolConfig.videos.length > 0 && (
+    <section class="py-16">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold text-center mb-12">Video Tutorials</h2>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {toolConfig.videos.map((video: any) => (
+            <div class="bg-white rounded-lg shadow-lg p-4">
+              <div class="aspect-video">
+                <iframe 
+                  src={video.url}
+                  title={video.title || `${platform} Downloader Tutorial`}
+                  class="w-full h-full rounded"
+                  frameborder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen
+                ></iframe>
+              </div>
+              {video.title && (
+                <p class="mt-4 text-center text-gray-700 font-medium">{video.title}</p>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
   <!-- Tutorial Article Section -->
   <section class="py-16">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
