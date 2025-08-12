@@ -7,7 +7,7 @@ name: Deploy PR Preview to GitHub Pages
 # difference is that the deploy step passes `preview: true` to the
 # `actions/deploy-pages` action, which tells GitHub to publish the
 # generated site as a temporary preview instead of replacing the
-# production site.  Each preview will have its own unique URL and will be
+# production site. Each preview will have its own unique URL and will be
 # automatically cleaned up when the pull request is closed.
 
 on:
