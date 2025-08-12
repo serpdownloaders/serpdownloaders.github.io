@@ -1,0 +1,94 @@
+name: Deploy PR Preview to GitHub Pages
+
+# This workflow builds the site for pull requests against `main` and then
+# deploys the result as a GitHub Pages preview.  It mirrors the production
+# workflow defined in `.github/workflows/deploy.yml` so that the same
+# Node.js version, dependencies and build steps are used.  The only
+# difference is that the deploy step passes `preview: true` to the
+# `actions/deploy-pages` action, which tells GitHub to publish the
+# generated site as a temporary preview instead of replacing the
+# production site.  Each preview will have its own unique URL and will be
+# automatically cleaned up when the pull request is closed.
+
+on:
+  # Run on pull requests opened against the main branch.  Using
+  # explicit types ensures that previews are removed when a pull request
+  # is closed.
+  pull_request:
+    branches: [ main ]
+    types:
+      - opened
+      - reopened
+      - synchronize
+      - closed
+
+# Grant the minimum necessary permissions.  `pages: write` and
+# `id‑token: write` are required by the deploy action.  `contents: read`
+# is needed to check out the repository.
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Use a concurrency group tied to the pull request head ref.  This
+# prevents multiple runs on the same pull request from stepping on each
+# other while still allowing different pull requests to build in
+# parallel.  We deliberately do not cancel in‑progress builds because
+# developers may push multiple commits in quick succession.
+concurrency:
+  group: pages-preview-${{ github.head_ref }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build with Astro
+        # Run the same build command as production.  Astro will pick up
+        # GITHUB_PAGES=true and adjust the build accordingly.
+        run: npm run build
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # The Astro build outputs to ./dist by default.
+          path: ./dist
+
+  deploy:
+    # Only deploy previews when the pull request is still open.  When
+    # closed, the preview will be automatically removed by GitHub if
+    # available.  The `needs` keyword ensures that the deploy job only
+    # runs after a successful build.
+    if: github.event.action != 'closed'
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      # Use the same environment as production.  GitHub will treat
+      # preview deployments differently when the `preview` input is
+      # passed below.
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages (preview)
+        id: deployment
+        uses: actions/deploy-pages@v4
+        with:
+          # Indicate that this is a preview deployment.  GitHub will
+          # publish the site at a unique URL associated with this pull
+          # request instead of overwriting the main site.  When the
+          # pull request is merged or closed, the preview will be
+          # removed automatically.  See the deploy‑pages documentation
+          # for more details about this input.
+          preview: true
