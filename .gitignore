@@ -9,3 +9,12 @@ node_modules
 # Build output
 dist/
 .astro/
+
+# Coders in Flow
+.venv
+.codex
+out
+dist
+*.vsix
+.claude
+CLAUDE.md
