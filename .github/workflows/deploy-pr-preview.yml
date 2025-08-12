@@ -1,0 +1,91 @@
+# .github/workflows/pr-preview.yml
+name: Deploy PR previews
+
+on:
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
+      - closed
+
+concurrency: preview-${{ github.ref }}
+
+jobs:
+  deploy-preview:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      pages: write
+      id-token: write
+    steps:
+      # Checkout the PR branch
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # Setup Ruby (same as your main workflow)
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.2'
+          bundler-cache: true
+
+      # Build the Jekyll site (only if not closing the PR)
+      - name: Build with Jekyll
+        if: github.event.action != 'closed'
+        run: |
+          bundle exec jekyll build --baseurl "/pr-preview/pr-${{ github.event.pull_request.number }}"
+        env:
+          JEKYLL_ENV: production
+
+      # Deploy the preview to GitHub Pages
+      - name: Deploy preview
+        uses: rossjrw/pr-preview-action@v1
+        with:
+          source-dir: ./_site
+          preview-branch: gh-pages
+          umbrella-dir: pr-preview
+          action: auto
+
+      # Post comment with preview URL
+      - name: Get preview URL
+        if: github.event.action != 'closed'
+        id: preview-url
+        run: |
+          echo "url=https://serpdownloaders.github.io/pr-preview/pr-${{ github.event.pull_request.number }}/" >> $GITHUB_OUTPUT
+
+      - name: Comment PR
+        if: github.event.action != 'closed'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const url = '${{ steps.preview-url.outputs.url }}';
+            const body = `### 🚀 Deploy Preview ready!\n\n🔗 **Preview URL:** ${url}\n\n*This preview will be automatically updated when you push new commits to this PR.*`;
+            
+            // Find and update existing comment or create new one
+            const { data: comments } = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+            });
+            
+            const botComment = comments.find(comment => 
+              comment.user.type === 'Bot' && comment.body.includes('Deploy Preview ready')
+            );
+            
+            if (botComment) {
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: botComment.id,
+                body: body
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body: body
+              });
+            }
