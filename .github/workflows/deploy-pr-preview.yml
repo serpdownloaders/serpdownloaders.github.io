@@ -1,4 +1,4 @@
-
+# .github/workflows/pr-preview.yml
 name: Deploy PR previews
 
 on:
@@ -24,12 +24,34 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # Setup Ruby (same as your main workflow)
+      # Setup Ruby with conditional bundler cache
       - name: Setup Ruby
+        if: github.event.action != 'closed'
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.2'
-          bundler-cache: true
+          bundler-cache: false  # Disable auto cache, we'll handle it manually
+
+      # Check if Gemfile exists and install dependencies accordingly
+      - name: Install dependencies
+        if: github.event.action != 'closed'
+        run: |
+          # First check if we need to get Gemfile from main branch
+          if [ ! -f "Gemfile" ]; then
+            echo "No Gemfile in PR branch, fetching from main branch..."
+            git fetch origin main
+            git checkout origin/main -- Gemfile Gemfile.lock 2>/dev/null || true
+          fi
+          
+          # Now install dependencies
+          if [ -f "Gemfile" ]; then
+            echo "Installing from Gemfile..."
+            gem install bundler
+            bundle install
+          else
+            echo "ERROR: No Gemfile found even after trying to fetch from main"
+            exit 1
+          fi
 
       # Build the Jekyll site (only if not closing the PR)
       - name: Build with Jekyll
